@@ -228,3 +228,63 @@ cmdItems.forEach((item) => {
         closeCmdPalette();
     });
 });
+
+// ---------- PROJECT DETAIL MODAL ----------
+const projectModals = document.querySelectorAll('.proj-modal-overlay[data-modal]');
+
+const openProjectModal = (modal) => {
+    if (!modal) return;
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+};
+
+const closeProjectModal = (modal) => {
+    if (!modal) return;
+    modal.hidden = true;
+    if (!document.querySelector('.proj-modal-overlay[data-modal]:not([hidden])')) {
+        document.body.style.overflow = '';
+    }
+};
+
+document.querySelectorAll('[data-open-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const modal = document.getElementById(btn.getAttribute('data-open-modal'));
+        openProjectModal(modal);
+    });
+});
+
+document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const closest = btn.closest('.proj-modal-overlay');
+        closeProjectModal(closest);
+    });
+});
+
+projectModals.forEach((modal) => {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeProjectModal(modal);
+    });
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const open = document.querySelector('.proj-modal-overlay[data-modal]:not([hidden])');
+        if (open) closeProjectModal(open);
+    }
+});
+
+// ---------- BACK TO TOP ----------
+const backToTopBtn = document.getElementById('backToTop');
+
+const onScrollBack = () => {
+    if (!backToTopBtn) return;
+    backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+};
+window.addEventListener('scroll', onScrollBack, { passive: true });
+onScrollBack();
+
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
