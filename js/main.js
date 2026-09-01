@@ -34,22 +34,23 @@ navLinks.querySelectorAll('a').forEach((link) => {
     });
 });
 
-// Scroll spy: highlight active nav link
-const sections = document.querySelectorAll('section[id]');
-const navAnchors = document.querySelectorAll('.nav-links a');
-
-const spy = () => {
-    const pos = window.scrollY + 120;
-    let currentId = '';
-    sections.forEach((sec) => {
-        if (pos >= sec.offsetTop) currentId = sec.id;
-    });
-    navAnchors.forEach((a) => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
-    });
-};
-window.addEventListener('scroll', spy);
-spy();
+// Scroll spy: highlight active nav link (hanya untuk halaman satu-gulir ber-anchor)
+const spyAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+if (spyAnchors.length > 0) {
+    const sections = document.querySelectorAll('section[id]');
+    const spy = () => {
+        const pos = window.scrollY + 120;
+        let currentId = '';
+        sections.forEach((sec) => {
+            if (pos >= sec.offsetTop) currentId = sec.id;
+        });
+        spyAnchors.forEach((a) => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+        });
+    };
+    window.addEventListener('scroll', spy);
+    spy();
+}
 
 // Reveal on scroll (fade-up)
 const revealEls = document.querySelectorAll('.section, .project-card, .skill-card, .tl-card, .contact-card, .edu-card');

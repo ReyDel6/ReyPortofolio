@@ -51,14 +51,21 @@ Alternatif: taruh isi folder `webphp` di document root web server (Apache/nginx)
 
 ## 📁 Struktur Folder
 
+Website kini menggunakan **layout multi-page**:
+
 ```
 webphp/
-├── index.php        # Template utama halaman portofolio
+├── index.php        # Beranda (hero + menu utama)
+├── about.php        # Tentang, pengalaman, pendidikan, pelatihan
+├── projects.php     # Proyek (kartu + modal detail)
+├── certificates.php # Skill & teknologi + sertifikat
+├── contact.php      # Kontak & sosial media
 ├── data.php         # Pusat data: profil, proyek, pengalaman, skill, sertifikat, pelatihan
+├── inc/             # Partial header & footer (dipakai semua halaman)
 ├── css/
 │   └── style.css    # Styling seluruh halaman
 ├── js/
-│   └── main.js      # Interaktivitas: toggle sertifikat, timeline, skill, command palette
+│   └── main.js      # Interaktivitas: modal, command palette, skill filter, back-to-top
 └── assets/          # Gambar, logo, preview proyek, PDF sertifikat, dan APK
 ```
 
@@ -82,6 +89,18 @@ $profile = [
 - `$certificates` — sertifikat & piagam.
 
 Setelah mengubah `data.php`, halaman otomatis ter-update tanpa mengedit template.
+
+## 🧭 Navigasi Halaman
+
+| File | Isi |
+|------|-----|
+| `index.php` | Beranda — hero + menu utama |
+| `about.php` | Tentang, pengalaman profesional, pendidikan, pelatihan |
+| `projects.php` | Proyek beserta modal detail setiap proyek |
+| `certificates.php` | Skill & ekosistem teknologi, sertifikat & lisensi |
+| `contact.php` | Kontak & kanal sosial media |
+
+Navbar di `inc/header.php` menandai halaman aktif lewat variabel `$activePage` yang di-set di awal tiap halaman.
 
 ## 🛠️ Teknologi
 
