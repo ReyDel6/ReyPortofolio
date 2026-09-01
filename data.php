@@ -41,6 +41,7 @@ $projects = [
         'badge'    => 'Hak Cipta Terdaftar',
         'image'    => 'assets/umkm-connect.png',
         'initial'  => 'UMKM Connect',
+        'github'   => 'https://github.com/ReyDel6/UMKM_Connect-Web',
         'desc'     => 'Platform web untuk UMKM yang memadukan <strong>Kasir/POS</strong>, <strong>QR Meja</strong> (pesan & bayar dari meja pelanggan), dan <strong>B2B antar-UMKM</strong> dalam satu akun.',
         'points'   => [
             '<strong>Marketplace B2B</strong> — toko online antar-UMKM dengan keranjang & checkout grosir.',
@@ -78,6 +79,8 @@ $projects = [
         'badge'    => 'Personal Web',
         'image'    => 'assets/portfolio-preview.svg',
         'initial'  => 'RD Portfolio',
+        'github'   => 'https://github.com/ReyDel6/ReyPortofolio',
+        'live'     => 'http://reydel.page.gd/',
         'desc'     => 'Website personal milik <strong>Reynaldi Delphiano</strong> untuk menampilkan profil profesional, pengalaman kerja, pendidikan, skill, proyek, dan sertifikasi dalam satu halaman yang responsif.',
         'points'   => [
             '<strong>Profil profesional</strong> — ringkasan diri, fokus pengembangan, dan kontak sosial media.',

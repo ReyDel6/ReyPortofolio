@@ -178,6 +178,12 @@ function getSocialIcon($label, $size = 20) {
                         </div>
                         <?php endif; ?>
                         <div class="proj-links">
+                            <?php if (!empty($proj['github'])): ?>
+                            <a href="<?php echo htmlspecialchars($proj['github']); ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a>
+                            <?php endif; ?>
+                            <?php if (!empty($proj['live'])): ?>
+                            <a href="<?php echo htmlspecialchars($proj['live']); ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo ↗</a>
+                            <?php endif; ?>
                             <?php if (!empty($proj['download']['file'])): ?>
                             <a href="<?php echo htmlspecialchars($proj['download']['file']); ?>" class="btn btn-ghost btn-sm" download>
                                 ↓ <?php echo htmlspecialchars($proj['download']['label'] ?? 'Unduh Aplikasi'); ?>
@@ -239,6 +245,12 @@ function getSocialIcon($label, $size = 20) {
                                     <?php endif; ?>
 
                                     <div class="proj-links">
+                                        <?php if (!empty($proj['github'])): ?>
+                                        <a href="<?php echo htmlspecialchars($proj['github']); ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a>
+                                        <?php endif; ?>
+                                        <?php if (!empty($proj['live'])): ?>
+                                        <a href="<?php echo htmlspecialchars($proj['live']); ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Live Demo ↗</a>
+                                        <?php endif; ?>
                                         <?php if (!empty($proj['download']['file'])): ?>
                                         <a href="<?php echo htmlspecialchars($proj['download']['file']); ?>" class="btn btn-ghost btn-sm" download>
                                             ↓ <?php echo htmlspecialchars($proj['download']['label'] ?? 'Unduh Aplikasi'); ?>

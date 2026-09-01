@@ -15,6 +15,9 @@
 
 html { scroll-behavior: smooth; }
 
+/* Anchor scroll offset agar heading section tidak tertutup navbar fixed */
+.section, [id] { scroll-margin-top: 92px; }
+
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: var(--bg);
