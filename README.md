@@ -16,6 +16,11 @@
   <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black" />
 </p>
 
+<p align="center">
+  <a href="http://reydel.page.gd/"><img src="https://img.shields.io/badge/LIVE-WEB-coolgreen?style=flat&logo=googlechrome&logoColor=white" alt="Live Website" /></a>
+  <a href="https://github.com/ReyDel6/ReyPortofolio"><img src="https://img.shields.io/badge/GitHub-ReyPortofolio-181717?style=flat&logo=github&logoColor=white" alt="GitHub" /></a>
+</p>
+
 ---
 
 ## 🖥️ Tentang Website
