@@ -36,9 +36,21 @@ require __DIR__ . '/inc/header.php';
                 </div>
             </div>
             <div class="hero-right">
-                <div class="hero-photo">
-                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="Foto <?php echo htmlspecialchars($p['name']); ?>" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
+                <div class="hero-photo" id="heroPhotoWrapper" title="Klik untuk beralih mode foto (Real / Pixel Art)">
+                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="Foto <?php echo htmlspecialchars($p['name']); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
+                    <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="Avatar Pixel <?php echo htmlspecialchars($p['name']); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
                     <div class="ph-fallback" id="phFallback" style="display:none;"><?php echo htmlspecialchars($p['initial']); ?></div>
+                    <div class="photo-mode-badge" id="photoModeBadge" role="toolbar" aria-label="Ganti Tampilan Foto Profil">
+                        <button type="button" class="photo-mode-btn active" data-mode="real" title="Mode Foto Asli">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+                            <span>Real</span>
+                        </button>
+                        <span class="photo-mode-divider"></span>
+                        <button type="button" class="photo-mode-btn" data-mode="pixel" title="Mode Pixel Art Avatar">
+                            <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M21 6H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zm-11 7H8v2H6v-2H4v-2h2V9h2v2h2v2zm4-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                            <span>Pixel</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

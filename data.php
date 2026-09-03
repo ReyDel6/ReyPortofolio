@@ -26,6 +26,7 @@ $profile = [
         ['label' => 'GitHub',      'handle' => 'ReyDel6',                'url' => 'https://github.com/ReyDel6'],
     ],
     'photo'         => 'assets/foto.jpeg',
+    'photo_avatar'  => 'assets/foto-pixel.jpg',
     'summary'       => [
         'Saya seorang <strong>Web & Mobile Developer</strong> yang berfokus membangun aplikasi web dan mobile yang fungsional, responsif, serta mudah digunakan. Saya terbiasa menggunakan Laravel/PHP, React, JavaScript, Flutter, MySQL, dan REST API untuk mengubah kebutuhan menjadi solusi digital.',
         'Salah satu proyek yang saya kembangkan adalah <strong>UMKM Connect</strong>, platform digital yang menggabungkan fitur Kasir/POS, QR Meja, dan B2B antar-UMKM. Proyek ini saya bangun untuk membantu pelaku UMKM mengelola transaksi, menerima pesanan, dan terhubung dengan mitra usaha secara lebih praktis.',
@@ -129,7 +130,7 @@ $projects = [
         ],
         'download' => [
             'label' => 'Unduh APK Android',
-            'file'  => 'assets/umkm-connect-mobile.apk',
+            'file'  => 'https://github.com/ReyDel6/UMKM_Connect-Web/releases',
         ],
     ],
 ];

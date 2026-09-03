@@ -289,3 +289,83 @@ if (backToTopBtn) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
+
+// ---------- HERO PHOTO ANIMATED SWITCHER ----------
+const heroPhotoWrapper = document.getElementById('heroPhotoWrapper');
+if (heroPhotoWrapper) {
+    const photoReal = document.getElementById('heroPhotoReal');
+    const photoPixel = document.getElementById('heroPhotoPixel');
+    const modeBtns = heroPhotoWrapper.querySelectorAll('.photo-mode-btn');
+    let currentMode = 'real';
+    let autoSwitchTimer = null;
+    let isHovered = false;
+
+    const setPhotoMode = (mode) => {
+        currentMode = mode;
+        const isPixel = mode === 'pixel';
+
+        if (photoReal && photoPixel) {
+            photoReal.classList.toggle('active', !isPixel);
+            photoPixel.classList.toggle('active', isPixel);
+        }
+
+        heroPhotoWrapper.classList.toggle('pixel-mode', isPixel);
+
+        modeBtns.forEach((btn) => {
+            btn.classList.toggle('active', btn.getAttribute('data-mode') === mode);
+        });
+    };
+
+    const togglePhotoMode = () => {
+        setPhotoMode(currentMode === 'real' ? 'pixel' : 'real');
+    };
+
+    const startAutoSwitch = () => {
+        stopAutoSwitch();
+        autoSwitchTimer = setInterval(() => {
+            if (!isHovered) {
+                togglePhotoMode();
+            }
+        }, 4200);
+    };
+
+    const stopAutoSwitch = () => {
+        if (autoSwitchTimer) {
+            clearInterval(autoSwitchTimer);
+            autoSwitchTimer = null;
+        }
+    };
+
+    // Mode buttons click
+    modeBtns.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const targetMode = btn.getAttribute('data-mode');
+            if (targetMode && targetMode !== currentMode) {
+                setPhotoMode(targetMode);
+                startAutoSwitch();
+            }
+        });
+    });
+
+    // Clicking anywhere on the photo wrapper toggles
+    heroPhotoWrapper.addEventListener('click', (e) => {
+        if (!e.target.closest('.photo-mode-btn')) {
+            togglePhotoMode();
+            startAutoSwitch();
+        }
+    });
+
+    // Hover pause behavior
+    heroPhotoWrapper.addEventListener('mouseenter', () => {
+        isHovered = true;
+    });
+
+    heroPhotoWrapper.addEventListener('mouseleave', () => {
+        isHovered = false;
+    });
+
+    // Start auto switch
+    startAutoSwitch();
+}
+
