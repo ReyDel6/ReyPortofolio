@@ -1454,6 +1454,20 @@ a { color: inherit; text-decoration: none; }
     .hero-stats-grid {
         grid-template-columns: 1fr;
     }
+    .page-first { padding-top: 120px; }
+    .proj-modal-head { padding: 14px 14px 14px; }
+    .proj-modal-body { padding: 16px; }
+    .proj-modal-title h3 { font-size: 1.05rem; }
+    .proj-sub { font-size: 0.76rem; }
+    .proj-points li { font-size: 0.84rem; }
+    .proj-chip { font-size: 0.76rem; padding: 4px 10px; }
+    .proj-cert { font-size: 0.84rem; }
+    .hki-text { font-size: 0.84rem; }
+    .section-head h2 { font-size: 1.7rem; }
+    .skill-card, .tl-card, .contact-card { padding: 18px; }
+    .tl-card { padding: 20px; }
+    .timeline { padding-left: 26px; }
+    .explore-card { padding: 20px 18px; }
 }
 .stat-pill {
     display: flex;
@@ -2153,9 +2167,17 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 640px) {
-    .proj-modal-head { padding: 16px; }
+    .proj-modal-head { padding: 16px; flex-direction: column; align-items: stretch; }
+    .proj-modal-title { gap: 12px; }
+    .proj-modal-title h3 { font-size: 1.15rem; }
+    .proj-modal-title .proj-intro { font-size: .86rem; }
+    .proj-modal-close { position: absolute; top: 12px; right: 12px; }
     .proj-modal-body { padding: 18px; }
     .proj-modal-logo { width: 60px; height: 60px; }
+    .proj-points { grid-template-columns: 1fr; }
+    .proj-links { flex-direction: column; align-items: stretch; }
+    .proj-links .btn { width: 100%; text-align: center; justify-content: center; }
+    .proj-cert { align-items: flex-start; }
     .back-to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; }
 }
 
