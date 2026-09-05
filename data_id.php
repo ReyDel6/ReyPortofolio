@@ -103,6 +103,12 @@ $projects = [
             'Kasir — transaksi penjualan cepat melalui antarmuka POS.',
             'Owner — melihat laporan penjualan & rekap usaha.',
         ],
+        'previews' => [
+            ['file' => 'assets/posmart-dashboard-preview.png', 'label' => 'Dashboard Admin'],
+            ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Katalog Produk & Kasir'],
+            ['file' => 'assets/posmart-products-preview.png', 'label' => 'Manajemen Produk'],
+            ['file' => 'assets/posmart-login-preview.png', 'label' => 'Halaman Login'],
+        ],
     ],
     [
         'title'    => 'Website Portfolio Reynaldi Delphiano',
