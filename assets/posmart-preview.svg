@@ -1,10 +1,48 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
   <title id="title">POSMart</title>
-  <desc id="desc">Logo logo POSMart</desc>
-  <rect width="600" height="600" rx="80" fill="#ffffff"/>
-  <rect x="150" y="110" width="300" height="300" rx="60" fill="#dc2626"/>
-  <path d="M238 210h-28v30h14c0-16 6-25 14-30zm28 0c-10 0-18 9-18 25 0-16-7-25-18-25h-3v-30h40v30zm36 56l-18-56h-24l16 56 24 16-14-16zm-20 22l26-92h-20l-22 92-6 14-44-30 14 16 46 46h8z" fill="#ffffff"/>
-  <path d="M238 210h-28v30h14c0-16 6-25 14-30z" fill="#fca5a5"/>
-  <text x="300" y="520" text-anchor="middle" fill="#0f172a" font-family="Arial, sans-serif" font-size="120" font-weight="800">POS</text>
-  <text x="300" y="600" text-anchor="middle" fill="#dc2626" font-family="Arial, sans-serif" font-size="86" font-weight="800">Mart</text>
+  <desc id="desc">Preview ilustrasi dashboard aplikasi Point of Sale POSMart</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1e293b"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#020617" flood-opacity=".5"/>
+    </filter>
+  </defs>
+  <rect width="600" height="600" rx="48" fill="url(#bg)"/>
+  <rect x="108" y="52" width="384" height="496" rx="34" fill="#0b122b" stroke="#475569" stroke-width="4" filter="url(#shadow)"/>
+  <rect x="108" y="52" width="384" height="76" rx="34" fill="#dc2626"/>
+  <rect x="108" y="86" width="384" height="42" fill="#dc2626"/>
+  <circle cx="138" cy="90" r="7" fill="#fff" opacity=".85"/>
+  <circle cx="160" cy="90" r="7" fill="#fff" opacity=".55"/>
+  <circle cx="182" cy="90" r="7" fill="#fff" opacity=".35"/>
+  <text x="216" y="99" fill="#fff" font-family="Arial, sans-serif" font-size="26" font-weight="800">POS Mart</text>
+  <text x="384" y="99" fill="#fecaca" font-family="Arial, sans-serif" font-size="16" font-weight="700">Kasir</text>
+
+  <rect x="132" y="150" width="118" height="126" rx="18" fill="#1f2937"/>
+  <rect x="132" y="150" width="118" height="34" rx="18" fill="#fca5a5"/>
+  <rect x="132" y="168" width="118" height="16" fill="#fca5a5"/>
+  <text x="150" y="178" fill="#7f1d1d" font-family="Arial, sans-serif" font-size="16" font-weight="800">Kasir</text>
+  <rect x="150" y="198" width="82" height="18" rx="9" fill="#334155"/>
+  <rect x="150" y="226" width="82" height="18" rx="9" fill="#334155"/>
+  <text x="150" y="300" width="82" height="18" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16" font-weight="700">Produk</text>
+  <text x="150" y="344" width="82" height="18" fill="#e2e8f0" font-family="Arial, sans-serif" font-size="16" font-weight="700">Laporan</text>
+
+  <rect x="270" y="150" width="198" height="110" rx="18" fill="#f8fafc"/>
+  <text x="292" y="188" fill="#64748b" font-family="Arial, sans-serif" font-size="16" font-weight="700">Penjualan hari ini</text>
+  <text x="292" y="232" fill="#0f172a" font-family="Arial, sans-serif" font-size="34" font-weight="800">Rp 2.850K</text>
+  <text x="404" y="232" fill="#16a34a" font-family="Arial, sans-serif" font-size="16" font-weight="700">▲ +12%</text>
+
+  <rect x="270" y="280" width="198" height="88" rx="18" fill="#1f2937"/>
+  <rect x="292" y="300" width="42" height="42" rx="10" fill="#38bdf8"/>
+  <text x="312" y="325" fill="#0b122b" font-family="Arial, sans-serif" font-size="20" font-weight="800">$</text>
+  <text x="348" y="318" fill="#f1f5f9" font-family="Arial, sans-serif" font-size="16" font-weight="700">Nasi Goreng</text>
+  <text x="348" y="342" fill="#94a3b8" font-family="Arial, sans-serif" font-size="14">2 x Rp 25.000</text>
+
+  <rect x="270" y="388" width="198" height="60" rx="18" fill="#dc2626"/>
+  <text x="300" y="428" fill="#fff" font-family="Arial, sans-serif" font-size="22" font-weight="800">Bayar Rp 50.000</text>
+
+  <rect x="270" y="468" width="198" height="34" rx="17" fill="#1d4ed8"/>
+  <text x="300" y="491" fill="#fff" font-family="Arial, sans-serif" font-size="16" font-weight="700">Lihat semua pesanan</text>
 </svg>
