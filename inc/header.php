@@ -3,7 +3,12 @@ require_once __DIR__ . '/../data.php';
 $p = $profile;
 
 if (!isset($activePage)) { $activePage = 'index'; }
-if (!isset($pageTitle))  { $pageTitle  = $p['name'] . ' — Portofolio'; }
+if (!isset($pageTitle))  { $pageTitle  = $p['name'] . ' — ' . t('portfolio_word'); }
+
+$selfFile   = basename($_SERVER['PHP_SELF']);
+$langSwitch = function ($to) use ($selfFile) {
+    return $selfFile . '?lang=' . $to;
+};
 
 function navLink($href, $label, $key) {
     $act = ($GLOBALS['activePage'] ?? 'index') === $key ? ' active' : '';
@@ -33,16 +38,25 @@ function getSocialIcon($label, $size = 20) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html lang="<?php echo htmlspecialchars($GLOBALS['LANG'] ?? 'id'); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
-    <meta name="description" content="Portofolio Reynaldi Delphiano — Web & Mobile Developer. Pengembangan web, aplikasi mobile, UMKM Connect, dan pengalaman profesional.">
+    <meta name="description" content="<?php echo htmlspecialchars(t('meta_desc')); ?>">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime(__DIR__ . '/../css/style.css'); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <?php if (!empty($googleAnalyticsId)): ?>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode($googleAnalyticsId); ?>"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '<?php echo htmlspecialchars($googleAnalyticsId, ENT_QUOTES, 'UTF-8'); ?>');
+    </script>
+    <?php endif; ?>
 </head>
 <body>
     <!-- SCROLL PROGRESS INDICATOR -->
@@ -55,27 +69,32 @@ function getSocialIcon($label, $size = 20) {
                 <span class="brand-badge"><?php echo htmlspecialchars($p['initial']); ?></span>
                 <span class="brand-name"><?php echo htmlspecialchars($p['brand']); ?><span class="brand-dot">.</span></span>
                 <svg class="verified-badge-svg" viewBox="0 0 24 24" width="18" height="18" fill="#38bdf8" title="Verified Developer"><path d="m23 12-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg>
-                <span class="status-badge" title="Tersedia untuk pekerjaan & proyek">
+                <span class="status-badge" title="<?php echo htmlspecialchars(t('status_title')); ?>">
                     <span class="status-pulse"></span> Available
                 </span>
             </a>
 
             <nav class="nav-links" id="navLinks">
-                <?php echo navLink('index.php', 'Beranda', 'index'); ?>
-                <?php echo navLink('about.php', 'Tentang', 'about'); ?>
-                <?php echo navLink('projects.php', 'Proyek', 'projects'); ?>
-                <?php echo navLink('certificates.php', 'Skill & Sertifikat', 'certificates'); ?>
-                <?php echo navLink('contact.php', 'Kontak', 'contact'); ?>
+                <?php echo navLink('index.php', t('nav_home'), 'index'); ?>
+                <?php echo navLink('about.php', t('nav_about'), 'about'); ?>
+                <?php echo navLink('projects.php', t('nav_projects'), 'projects'); ?>
+                <?php echo navLink('certificates.php', t('nav_certificates'), 'certificates'); ?>
+                <?php echo navLink('contact.php', t('nav_contact'), 'contact'); ?>
             </nav>
 
             <div class="nav-actions">
-                <button class="btn-cmd-k" id="openCmdPalette" title="Buka Command Palette (Ctrl+K)">
+                <div class="lang-switch" role="group" aria-label="<?php echo htmlspecialchars(t('lang_switch_aria')); ?>">
+                    <a href="<?php echo htmlspecialchars($langSwitch('id')); ?>" class="lang-btn<?php echo ($GLOBALS['LANG'] ?? 'id') === 'id' ? ' active' : ''; ?>" hreflang="id" title="<?php echo htmlspecialchars(t('lang_id')); ?>">ID</a>
+                    <span class="lang-divider"></span>
+                    <a href="<?php echo htmlspecialchars($langSwitch('en')); ?>" class="lang-btn<?php echo ($GLOBALS['LANG'] ?? 'id') === 'en' ? ' active' : ''; ?>" hreflang="en" title="<?php echo htmlspecialchars(t('lang_en')); ?>">EN</a>
+                </div>
+                <button class="btn-cmd-k" id="openCmdPalette" title="<?php echo htmlspecialchars(t('cmd_btn_title')); ?>">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M20 5H4c-1.1 0-1.99.9-1.99 2L2 17c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-9 3h2v2h-2V8zm0 3h2v2h-2v-2zM8 8h2v2H8V8zm0 3h2v2H8v-2zm-1 2H5v-2h2v2zm0-3H5V8h2v2zm9 7H8v-2h8v2zm0-4h-2v-2h2v2zm0-3h-2V8h2v2zm3 3h-2v-2h2v2zm0-3h-2V8h2v2z"/></svg>
-                    <span>Cari</span>
+                    <span><?php echo t('cmd_btn_label'); ?></span>
                     <kbd>⌘K</kbd>
                 </button>
-                <a href="contact.php" class="btn-nav-cta">Hubungi ⚡</a>
-                <button class="nav-toggle" id="navToggle" aria-label="Menu Navigasi">
+                <a href="contact.php" class="btn-nav-cta"><?php echo t('cta_contact'); ?></a>
+                <button class="nav-toggle" id="navToggle" aria-label="<?php echo htmlspecialchars(t('nav_toggle_aria')); ?>">
                     <span></span><span></span><span></span>
                 </button>
             </div>

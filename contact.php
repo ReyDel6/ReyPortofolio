@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . '/data.php';
 $activePage = 'contact';
-$pageTitle  = 'Kontak — ' . $profile['name'];
+$pageTitle  = t('contact_title_all') . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
 ?>
     <!-- KONTAK -->
     <section class="section page-first" id="kontak">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Kontak</span>
-                <h2>Mari Terhubung</h2>
-                <p class="section-subdesc">Silakan hubungi saya melalui salah satu kanal sosial media atau email berikut. Saya terbuka untuk peluang kerja, kolaborasi, dan proyek.</p>
+                <span class="tag"><?php echo t('contact_tag'); ?></span>
+                <h2><?php echo t('contact_heading'); ?></h2>
+                <p class="section-subdesc"><?php echo htmlspecialchars(t('contact_subdesc')); ?></p>
             </div>
             <div class="contact-grid">
                 <?php foreach ($p['social'] as $s): ?>

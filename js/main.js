@@ -82,13 +82,16 @@ if (toggleTimelineBtn) {
                 if (card) card.classList.add('revealed');
             });
             toggleTimelineBtn.setAttribute('data-expanded', 'true');
-            if (textSpan) textSpan.textContent = 'Ciutkan Riwayat Karir';
+            if (textSpan) textSpan.textContent = (window.I18N && window.I18N.timelineCollapse) ? window.I18N.timelineCollapse : 'Ciutkan Riwayat Karir';
         } else {
             extraItems.forEach((item) => {
                 item.classList.add('tl-hidden');
             });
             toggleTimelineBtn.setAttribute('data-expanded', 'false');
-            if (textSpan) textSpan.textContent = `Lihat Semua Pengalaman (${document.querySelectorAll('.tl-item').length} Riwayat Karir)`;
+            const total = document.querySelectorAll('.tl-item').length;
+            if (textSpan) textSpan.textContent = (window.I18N && window.I18N.timelineExpand)
+                ? window.I18N.timelineExpand.replace('{n}', total)
+                : `Lihat Semua Pengalaman (${total} Riwayat Karir)`;
             
             const expSection = document.getElementById('pengalaman');
             if (expSection) {
@@ -115,8 +118,10 @@ if (toggleCertificatesBtn) {
         toggleCertificatesBtn.setAttribute('aria-expanded', String(!isExpanded));
         if (textSpan) {
             textSpan.textContent = isExpanded
-                ? `Lihat Semua Sertifikat (${totalCertificates})`
-                : 'Tampilkan Lebih Sedikit';
+                ? (window.I18N && window.I18N.certMore
+                    ? window.I18N.certMore.replace('{n}', totalCertificates)
+                    : `Lihat Semua Sertifikat (${totalCertificates})`)
+                : ((window.I18N && window.I18N.certLess) ? window.I18N.certLess : 'Tampilkan Lebih Sedikit');
         }
     });
 }
@@ -228,50 +233,6 @@ cmdItems.forEach((item) => {
     item.addEventListener('click', () => {
         closeCmdPalette();
     });
-});
-
-// ---------- PROJECT DETAIL MODAL ----------
-const projectModals = document.querySelectorAll('.proj-modal-overlay[data-modal]');
-
-const openProjectModal = (modal) => {
-    if (!modal) return;
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-};
-
-const closeProjectModal = (modal) => {
-    if (!modal) return;
-    modal.hidden = true;
-    if (!document.querySelector('.proj-modal-overlay[data-modal]:not([hidden])')) {
-        document.body.style.overflow = '';
-    }
-};
-
-document.querySelectorAll('[data-open-modal]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        const modal = document.getElementById(btn.getAttribute('data-open-modal'));
-        openProjectModal(modal);
-    });
-});
-
-document.querySelectorAll('[data-close-modal]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-        const closest = btn.closest('.proj-modal-overlay');
-        closeProjectModal(closest);
-    });
-});
-
-projectModals.forEach((modal) => {
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeProjectModal(modal);
-    });
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        const open = document.querySelector('.proj-modal-overlay[data-modal]:not([hidden])');
-        if (open) closeProjectModal(open);
-    }
 });
 
 // ---------- BACK TO TOP ----------

@@ -1,15 +1,15 @@
 <?php
 require_once __DIR__ . '/data.php';
 $activePage = 'about';
-$pageTitle  = 'Tentang & Pengalaman — ' . $profile['name'];
+$pageTitle  = t('about_title_all') . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
 ?>
     <!-- TENTANG -->
     <section class="section page-first" id="tentang">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Tentang Saya</span>
-                <h2>Ringkasan</h2>
+                <span class="tag"><?php echo t('about_tag'); ?></span>
+                <h2><?php echo t('about_heading'); ?></h2>
             </div>
             <div class="about-grid">
                 <div class="about-card">
@@ -17,15 +17,15 @@ require __DIR__ . '/inc/header.php';
                         <p><?php echo $para; ?></p>
                     <?php endforeach; ?>
                     <div class="signature-block">
-                        <span class="signature-label">Salam hangat,</span>
-                        <img src="assets/ttd-rey-cropped.png" alt="Tanda tangan digital Reynaldi Delphiano" class="signature-image" loading="lazy">
+                        <span class="signature-label"><?php echo t('signature_label'); ?></span>
+                        <img src="assets/ttd-rey-cropped.png" alt="<?php echo htmlspecialchars(t('signature_alt')); ?>" class="signature-image" loading="lazy">
                     </div>
                 </div>
                 <div class="about-card">
-                    <p><strong>Berbasis di:</strong> <?php echo htmlspecialchars($p['location']); ?></p>
-                    <p><strong>Bahasa:</strong> <?php echo htmlspecialchars($p['languages']); ?></p>
-                    <p><strong>Fokus:</strong> <?php echo htmlspecialchars($p['focus']); ?></p>
-                    <a href="contact.php" class="btn btn-primary btn-sm">Kontak Saya</a>
+                    <p><strong><?php echo t('about_base'); ?></strong> <?php echo htmlspecialchars($p['location']); ?></p>
+                    <p><strong><?php echo t('about_lang'); ?></strong> <?php echo htmlspecialchars($p['languages']); ?></p>
+                    <p><strong><?php echo t('about_focus'); ?></strong> <?php echo htmlspecialchars($p['focus']); ?></p>
+                    <a href="contact.php" class="btn btn-primary btn-sm"><?php echo t('btn_contact_me'); ?></a>
                 </div>
             </div>
         </div>
@@ -35,9 +35,9 @@ require __DIR__ . '/inc/header.php';
     <section class="section section-alt" id="pengalaman">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Perjalanan Karir</span>
-                <h2>Pengalaman Profesional</h2>
-                <p class="section-subdesc">Rekam jejak pengalaman kerja, kepemimpinan, operasional, dan bidang teknis.</p>
+                <span class="tag"><?php echo t('career_tag'); ?></span>
+                <h2><?php echo t('career_heading'); ?></h2>
+                <p class="section-subdesc"><?php echo htmlspecialchars(t('career_subdesc')); ?></p>
             </div>
 
             <!-- TIMELINE -->
@@ -51,8 +51,8 @@ require __DIR__ . '/inc/header.php';
                 <div class="career-group">
                     <div class="career-group-head">
                         <span class="tag <?php echo $careerTrack === 'IT' ? 'tag-it' : 'tag-non-it'; ?>"><?php echo htmlspecialchars($careerTrack); ?></span>
-                        <h3>Karir <?php echo htmlspecialchars($careerTrack); ?></h3>
-                        <span class="career-group-count"><?php echo count($careerGroup); ?> pengalaman</span>
+                        <h3><?php echo $careerTrack === 'IT' ? t('career_it') : t('career_nonit'); ?></h3>
+                        <span class="career-group-count"><?php echo t('career_count', ['n' => count($careerGroup)]); ?></span>
                     </div>
                     <div class="timeline">
                         <?php foreach ($careerGroup as $exp): ?>
@@ -96,6 +96,15 @@ require __DIR__ . '/inc/header.php';
                                         <li><?php echo htmlspecialchars($item); ?></li>
                                     <?php endforeach; ?>
                                 </ul>
+                                <?php if (!empty($exp['photos'])): ?>
+                                <div class="experience-photos">
+                                    <?php foreach ($exp['photos'] as $photo): ?>
+                                    <a href="<?php echo htmlspecialchars($photo); ?>" target="_blank" rel="noopener" title="<?php echo htmlspecialchars(t('exp_photo_title', ['org' => $exp['org']])); ?>">
+                                        <img src="<?php echo htmlspecialchars($photo); ?>" alt="<?php echo htmlspecialchars(t('exp_photo_alt', ['org' => $exp['org']])); ?>" loading="lazy">
+                                    </a>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <?php $careerIndex++; ?>
@@ -109,7 +118,7 @@ require __DIR__ . '/inc/header.php';
             <?php if (count($experiences) > 5): ?>
             <div class="timeline-toggle-wrap">
                 <button type="button" class="btn btn-ghost" id="toggleTimelineBtn" data-expanded="false">
-                    <span class="toggle-text">Lihat Semua Pengalaman (<?php echo count($experiences); ?> Riwayat Karir)</span>
+                    <span class="toggle-text"><?php echo t('timeline_expand', ['n' => count($experiences)]); ?></span>
                     <span class="toggle-icon">▼</span>
                 </button>
             </div>
@@ -122,8 +131,8 @@ require __DIR__ . '/inc/header.php';
     <section class="section" id="pendidikan">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Akademik</span>
-                <h2>Pendidikan Formal</h2>
+                <span class="tag"><?php echo t('edu_tag'); ?></span>
+                <h2><?php echo t('edu_heading'); ?></h2>
             </div>
             <div class="edu-grid">
                 <?php foreach ($education as $edu): ?>
@@ -134,11 +143,11 @@ require __DIR__ . '/inc/header.php';
                                 <img src="<?php echo htmlspecialchars($edu['logo']); ?>" alt="<?php echo htmlspecialchars($edu['school']); ?>" class="edu-logo-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                                 <div class="edu-bsi-fallback" style="display:none;">
                                     <span class="edu-bsi-text">UBSI</span>
-                                    <span class="edu-bsi-sub">Kampus</span>
+                                    <span class="edu-bsi-sub"><?php echo t('campus_word'); ?></span>
                                 </div>
                             <?php else: ?>
                                 <span class="edu-bsi-text">UBSI</span>
-                                <span class="edu-bsi-sub">Kampus</span>
+                                <span class="edu-bsi-sub"><?php echo t('campus_word'); ?></span>
                             <?php endif; ?>
                         </div>
                         <span class="edu-icon-symbol">🎓</span>
@@ -165,9 +174,9 @@ require __DIR__ . '/inc/header.php';
     <section class="section section-alt" id="pelatihan">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Pengembangan</span>
-                <h2>Pelatihan Profesional</h2>
-                <p class="section-subdesc">Program pelatihan kerja dan vokasi yang pernah diikuti di PPKPI.</p>
+                <span class="tag"><?php echo t('training_tag'); ?></span>
+                <h2><?php echo t('training_heading'); ?></h2>
+                <p class="section-subdesc"><?php echo htmlspecialchars(t('training_subdesc')); ?></p>
             </div>
             <div class="training-grid">
                 <?php foreach ($trainings as $training): ?>
@@ -175,7 +184,7 @@ require __DIR__ . '/inc/header.php';
                     <div class="training-card-head">
                         <div class="training-icon">
                             <?php if (!empty($training['logo'])): ?>
-                            <img src="<?php echo htmlspecialchars($training['logo']); ?>" alt="Logo <?php echo htmlspecialchars($training['org']); ?>" class="training-logo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
+                            <img src="<?php echo htmlspecialchars($training['logo']); ?>" alt="<?php echo htmlspecialchars(t('alt_logo', ['org' => $training['org']])); ?>" class="training-logo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
                             <span class="training-icon-fallback" style="display:none;"><?php echo htmlspecialchars($training['icon'] ?? '📚'); ?></span>
                             <?php else: ?>
                             <?php echo htmlspecialchars($training['icon'] ?? '📚'); ?>

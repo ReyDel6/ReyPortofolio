@@ -7,6 +7,7 @@
 <p align="center">
   Website portofolio pribadi <strong>Reynaldi Delphiano (ReyDel)</strong> — Web & Mobile Developer.
   Menampilkan profil profesional, pengalaman kerja, pendidikan, skill, proyek, pelatihan, dan sertifikasi dalam satu halaman yang responsif.
+  Mendukung <strong>dua bahasa</strong> (Indonesia & English) dengan tombol pergantian di navbar.
 </p>
 
 <p align="center">
@@ -33,6 +34,7 @@ Website ini adalah halaman portofolio satu halaman (_single page_) milik **Reyna
 - **Skill & teknologi** — stacks yang dikuasai (Laravel, React, Flutter, dsb.).
 - **Pelatihan & sertifikasi** — program pelatihan PPKPI dan galeri sertifikat dengan link PDF.
 - **Responsive design** — tampilan menyesuaikan desktop, tablet, dan mobile.
+- **Bilingual (ID/EN)** — beralih bahasa via tombol `ID | EN` di navbar; pilihan disimpan di cookie.
 
 ## 🚀 Cara Menjalankan
 
@@ -60,8 +62,10 @@ webphp/
 ├── projects.php     # Proyek (kartu + modal detail)
 ├── certificates.php # Skill & teknologi + sertifikat
 ├── contact.php      # Kontak & sosial media
-├── data.php         # Pusat data: profil, proyek, pengalaman, skill, sertifikat, pelatihan
-├── inc/             # Partial header & footer (dipakai semua halaman)
+├── data.php         # Resolver bahasa: memilih data_en.php / data_id.php
+├── data_id.php      # Pusat data versi Indonesia (profil, proyek, pengalaman, skill, sertifikat)
+├── data_en.php      # Pusat data versi English (struktur identik dengan data_id.php)
+├── inc/             # Partial header & footer + inc/lang.php (sistem bahasa & kamus UI)
 ├── css/
 │   └── style.css    # Styling seluruh halaman
 ├── js/
@@ -71,10 +75,15 @@ webphp/
 
 ## ✏️ Mengedit Konten
 
-Hampir semua konten website dapat diubah **hanya dari satu file**, yaitu `data.php`:
+Konten website terpusat di **satu struktur data** yang disediakan dalam dua versi bahasa:
+
+- `data_id.php` — konten **Indonesia**
+- `data_en.php` — konten **English**
+
+Ubah teks di kedua file agar terjemahan tetap sinkron. Struktur array pada kedua file **harus identik** (jumlah baris data sama), hanya isi teksnya yang berbeda.
 
 ```php
-// Contoh: mengubah profil
+// Contoh: mengubah profil (di data_id.php dan data_en.php)
 $profile = [
     'name' => 'Reynaldi Delphiano',
     'role' => 'Web & Mobile Developer',
@@ -88,7 +97,14 @@ $profile = [
 - `$skills` / `$techSkillPills` — keahlian dan teknologi.
 - `$certificates` — sertifikat & piagam.
 
-Setelah mengubah `data.php`, halaman otomatis ter-update tanpa mengedit template.
+Setelah mengubah data, halaman otomatis ter-update tanpa mengedit template. Teks antarmuka (navbar, tombol, judul section) diatur di `inc/lang.php` melalui fungsi `t('key')`.
+
+## 🌐 Sistem Bahasa (Bilingual)
+
+- Deteksi otomatis: `?lang=` di URL → cookie `lang` → bahasa browser → default `id`.
+- Tombol `ID | EN` di navbar untuk berpindah bahasa; pilihan disimpan di cookie (365 hari).
+- Konten & data: `data_id.php` / `data_en.php`.
+- Teks UI halaman & `window.I18N` (untuk JS toggle): `inc/lang.php`.
 
 ## 🧭 Navigasi Halaman
 

@@ -15,12 +15,11 @@ require __DIR__ . '/inc/header.php';
                 </h1>
                 <p class="hero-role"><?php echo htmlspecialchars($p['role']); ?><span class="dot-sep">•</span><?php echo htmlspecialchars($p['role2']); ?></p>
                 <p class="hero-desc">
-                    Passionate terhadap teknologi, pengembangan web & mobile, dan pemanfaatan
-                    teknologi untuk kemajuan UMKM Indonesia. Kreator <strong>UMKM Connect</strong>.
+                    <?php echo t('hero_desc'); ?>
                 </p>
                 <div class="hero-actions">
-                    <a href="projects.php" class="btn btn-primary">Lihat Proyek</a>
-                    <a href="contact.php" class="btn btn-ghost">Hubungi Saya</a>
+                    <a href="projects.php" class="btn btn-primary"><?php echo t('btn_projects'); ?></a>
+                    <a href="contact.php" class="btn btn-ghost"><?php echo t('btn_contact'); ?></a>
                 </div>
                 <!-- STATS HIGHLIGHTS -->
                 <div class="hero-stats-grid">
@@ -36,17 +35,17 @@ require __DIR__ . '/inc/header.php';
                 </div>
             </div>
             <div class="hero-right">
-                <div class="hero-photo" id="heroPhotoWrapper" title="Klik untuk beralih mode foto (Real / Pixel Art)">
-                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="Foto <?php echo htmlspecialchars($p['name']); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
-                    <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="Avatar Pixel <?php echo htmlspecialchars($p['name']); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
+                <div class="hero-photo" id="heroPhotoWrapper" title="<?php echo htmlspecialchars(t('photo_wrapper_title')); ?>">
+                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
+                    <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="<?php echo htmlspecialchars(t('alt_pixel', ['name' => $p['name']])); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
                     <div class="ph-fallback" id="phFallback" style="display:none;"><?php echo htmlspecialchars($p['initial']); ?></div>
-                    <div class="photo-mode-badge" id="photoModeBadge" role="toolbar" aria-label="Ganti Tampilan Foto Profil">
-                        <button type="button" class="photo-mode-btn active" data-mode="real" title="Mode Foto Asli">
+                    <div class="photo-mode-badge" id="photoModeBadge" role="toolbar" aria-label="<?php echo htmlspecialchars(t('photo_mode_aria')); ?>">
+                        <button type="button" class="photo-mode-btn active" data-mode="real" title="<?php echo htmlspecialchars(t('mode_real_title')); ?>">
                             <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
                             <span>Real</span>
                         </button>
                         <span class="photo-mode-divider"></span>
-                        <button type="button" class="photo-mode-btn" data-mode="pixel" title="Mode Pixel Art Avatar">
+                        <button type="button" class="photo-mode-btn" data-mode="pixel" title="<?php echo htmlspecialchars(t('mode_pixel_title')); ?>">
                             <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M21 6H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zm-11 7H8v2H6v-2H4v-2h2V9h2v2h2v2zm4-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3 3a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
                             <span>Pixel</span>
                         </button>
@@ -60,33 +59,33 @@ require __DIR__ . '/inc/header.php';
     <section class="section" id="jelajah">
         <div class="container">
             <div class="section-head">
-                <span class="tag">Menu Utama</span>
-                <h2>Jelajahi Portofolio</h2>
+                <span class="tag"><?php echo t('explore_tag'); ?></span>
+                <h2><?php echo t('explore_title'); ?></h2>
             </div>
             <div class="explore-grid">
                 <a class="explore-card" href="about.php">
                     <span class="explore-icon">👤</span>
-                    <h3>Tentang & Pengalaman</h3>
-                    <p>Profil ringkas, riwayat karir lintas bidang, pendidikan, dan pelatihan.</p>
-                    <span class="explore-arrow">Buka Halaman →</span>
+                    <h3><?php echo t('explore_about_t'); ?></h3>
+                    <p><?php echo htmlspecialchars(t('explore_about_d')); ?></p>
+                    <span class="explore-arrow"><?php echo t('explore_arrow'); ?></span>
                 </a>
                 <a class="explore-card" href="projects.php">
                     <span class="explore-icon">🚀</span>
-                    <h3>Proyek</h3>
-                    <p>UMKM Connect (Web & Mobile) beserta fitur, dokumentasi, dan hak cipta.</p>
-                    <span class="explore-arrow">Buka Halaman →</span>
+                    <h3><?php echo t('explore_proj_t'); ?></h3>
+                    <p><?php echo htmlspecialchars(t('explore_proj_d')); ?></p>
+                    <span class="explore-arrow"><?php echo t('explore_arrow'); ?></span>
                 </a>
                 <a class="explore-card" href="certificates.php">
                     <span class="explore-icon">🛠️</span>
-                    <h3>Skill & Sertifikat</h3>
-                    <p>Tech stack, kemampuan, serta galeri sertifikat dan lisensi pelatihan.</p>
-                    <span class="explore-arrow">Buka Halaman →</span>
+                    <h3><?php echo t('explore_cert_t'); ?></h3>
+                    <p><?php echo htmlspecialchars(t('explore_cert_d')); ?></p>
+                    <span class="explore-arrow"><?php echo t('explore_arrow'); ?></span>
                 </a>
                 <a class="explore-card" href="contact.php">
                     <span class="explore-icon">✉️</span>
-                    <h3>Kontak</h3>
-                    <p>Hubungi saya melalui email, WhatsApp, LinkedIn, dan sosial media lain.</p>
-                    <span class="explore-arrow">Buka Halaman →</span>
+                    <h3><?php echo t('explore_contact_t'); ?></h3>
+                    <p><?php echo htmlspecialchars(t('explore_contact_d')); ?></p>
+                    <span class="explore-arrow"><?php echo t('explore_arrow'); ?></span>
                 </a>
             </div>
         </div>
