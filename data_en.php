@@ -65,7 +65,7 @@ $projects = [
             'Payments: Midtrans Snap API',
         ],
         'roles'    => [
-            'Owner/MSME — full management of products, stock, employees, reports.',
+            'Owner/MSME — manages products, stock, employees, and reports.',
             'Admin — assists the owner with store operations.',
             'Cashier — POS cashier, table orders, cashier profile.',
             'Supplier — equivalent to an MSME; their products appear in the marketplace.',
@@ -85,7 +85,7 @@ $projects = [
         'initial'  => 'RD Portfolio',
         'github'   => 'https://github.com/ReyDel6/ReyPortofolio',
         'live'     => 'http://reydel.page.gd/',
-        'desc'     => 'A personal website belonging to <strong>Reynaldi Delphiano</strong> to showcase a professional profile, work experience, education, skills, projects, and certifications in one responsive page.',
+        'desc'     => 'A personal website belonging to <strong>Reynaldi Delphiano</strong> to showcase a professional profile, work experience, education, skills, projects, and certifications in a single responsive page.',
         'points'   => [
             '<strong>Professional profile</strong> — self summary, development focus, and social media contacts.',
             '<strong>Project showcase</strong> — presents UMKM Connect along with its features and documentation.',
@@ -270,7 +270,7 @@ $experiences = [
         'track'       => 'Non-IT',
         'org'         => 'Ralali.com (B2B Marketplace)',
         'date'        => 'May 2022 – Jan 2023',
-        'location'    => 'Jabodetabek',
+        'location'    => 'Greater Jakarta',
         'category'    => 'Sales & Business',
         'icon'        => '🛒',
         'badge'       => 'Ralali',
