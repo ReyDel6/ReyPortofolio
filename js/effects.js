@@ -93,34 +93,7 @@
     }
     initDust();
 
-    // ---------- 1b. THEME TOGGLE ----------
-    var themeBtn = document.getElementById('themeToggle');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', function () {
-            var root = document.documentElement;
-            var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            root.setAttribute('data-theme', next);
-            try { localStorage.setItem('rey-theme', next); } catch (e) {}
-        });
-    }
-
-    // ---------- 1c. CURSOR GLOW ----------
-    var glow = document.getElementById('cursorGlow');
-    var glowVisible = false;
-    if (glow && window.matchMedia('(pointer: fine)').matches && !prefersReduced) {
-        var glowX = -9999, glowY = -9999, gx = -9999, gy = -9999;
-        window.addEventListener('mousemove', function (e) {
-            glowX = e.clientX; glowY = e.clientY;
-        }, { passive: true });
-        (function loop() {
-            gx += (glowX - gx) * 0.12;
-            gy += (glowY - gy) * 0.12;
-            glow.style.transform = 'translate(' + gx + 'px, ' + gy + 'px) translate(-50%, -50%)';
-            requestAnimationFrame(loop);
-        })();
-    }
-
-    // ---------- 1d. ANIMATED COUNTERS ----------
+    // ---------- 1b. ANIMATED COUNTERS ----------
     function animateCount(el) {
         var raw = el.getAttribute('data-count');
         if (raw === null || raw === '') return;

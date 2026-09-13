@@ -49,13 +49,8 @@ require __DIR__ . '/inc/header.php';
             </div>
             <div class="hero-right">
                 <div class="hero-photo" id="heroPhotoWrapper" title="<?php echo htmlspecialchars(t('photo_wrapper_title')); ?>">
-                    <?php
-                        $heroReal = is_file(__DIR__ . '/' . preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo'])) ? preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo']) : $p['photo'];
-                        $pixelSrc = $p['photo_avatar'] ?? 'assets/foto-pixel.jpg';
-                        $heroPixel = is_file(__DIR__ . '/' . preg_replace('/\.(jpe?g|png)$/i', '.webp', $pixelSrc)) ? preg_replace('/\.(jpe?g|png)$/i', '.webp', $pixelSrc) : $pixelSrc;
-                    ?>
-                    <img src="<?php echo htmlspecialchars($heroReal); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
-                    <img src="<?php echo htmlspecialchars($heroPixel); ?>" alt="<?php echo htmlspecialchars(t('alt_pixel', ['name' => $p['name']])); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
+                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
+                    <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="<?php echo htmlspecialchars(t('alt_pixel', ['name' => $p['name']])); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
                     <div class="ph-fallback" id="phFallback" style="display:none;"><?php echo htmlspecialchars($p['initial']); ?></div>
                     <div class="photo-mode-badge" id="photoModeBadge" role="toolbar" aria-label="<?php echo htmlspecialchars(t('photo_mode_aria')); ?>">
                         <button type="button" class="photo-mode-btn active" data-mode="real" title="<?php echo htmlspecialchars(t('mode_real_title')); ?>">
