@@ -84,7 +84,6 @@ function getSocialIcon($label, $size = 20) {
     <script>
         (function () {
             var t = localStorage.getItem('rey-theme');
-            if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
             document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
         })();
     </script>
