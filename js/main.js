@@ -326,6 +326,21 @@ if (heroPhotoWrapper) {
         isHovered = false;
     });
 
+    // Swipe gesture (mobile) — Real <-> Pixel
+    let swipeStartX = null;
+    heroPhotoWrapper.addEventListener('touchstart', (e) => {
+        swipeStartX = e.touches[0].clientX;
+    }, { passive: true });
+    heroPhotoWrapper.addEventListener('touchend', (e) => {
+        if (swipeStartX === null) return;
+        const deltaX = e.changedTouches[0].clientX - swipeStartX;
+        swipeStartX = null;
+        if (Math.abs(deltaX) > 60) {
+            setPhotoMode(deltaX < 0 ? 'pixel' : 'real');
+            startAutoSwitch();
+        }
+    }, { passive: true });
+
     // Start auto switch
     startAutoSwitch();
 }

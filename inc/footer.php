@@ -57,6 +57,9 @@
             certLess:         <?php echo json_encode(t('cert_less'), JSON_UNESCAPED_UNICODE); ?>
         };
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/effects.js?v=<?php echo filemtime(__DIR__ . '/../js/effects.js'); ?>"></script>
     <script src="js/main.js?v=<?php echo filemtime(__DIR__ . '/../js/main.js'); ?>"></script>
 </body>
 </html>

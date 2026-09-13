@@ -21,11 +21,24 @@ require __DIR__ . '/inc/header.php';
                     <a href="projects.php" class="btn btn-primary"><?php echo t('btn_projects'); ?></a>
                     <a href="contact.php" class="btn btn-ghost"><?php echo t('btn_contact'); ?></a>
                 </div>
+                <!-- TECH MARQUEE -->
+                <div class="tech-marquee" aria-hidden="true">
+                    <div class="tech-marquee-track">
+                        <?php $m1 = ['React', 'Laravel', 'PHP', 'Flutter', 'Next.js', 'MySQL', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Docker', 'Git', 'Figma', 'Express', 'Node.js', 'Prisma', 'Nginx']; ?>
+                        <?php $m2 = $m1; for ($i = 0; $i < 2; $i++): foreach (($i % 2 === 0 ? $m1 : $m2) as $tech): ?>
+                        <span><?php echo htmlspecialchars($tech); ?></span>
+                        <?php endforeach; endfor; ?>
+                    </div>
+                </div>
                 <!-- STATS HIGHLIGHTS -->
                 <div class="hero-stats-grid">
-                    <?php foreach ($stats as $st): ?>
+                    <?php foreach ($stats as $st):
+                        $cnt = '';
+                        $sfx = '';
+                        if (preg_match('/^\s*(\d+(?:\.\d+)?)\s*([+]?)/', $st['num'], $m)) { $cnt = $m[1]; $sfx = $m[2] ?? ''; }
+                    ?>
                     <div class="stat-pill">
-                        <span class="stat-num"><?php echo htmlspecialchars($st['num']); ?></span>
+                        <span class="stat-num"<?php echo $cnt !== '' ? ' data-count="' . $cnt . '" data-suffix="' . htmlspecialchars($sfx) . '"' : ''; ?>><?php echo htmlspecialchars($st['num']); ?></span>
                         <div class="stat-info">
                             <span class="stat-lbl"><?php echo htmlspecialchars($st['label']); ?></span>
                             <span class="stat-sub"><?php echo htmlspecialchars($st['sub']); ?></span>
@@ -36,8 +49,14 @@ require __DIR__ . '/inc/header.php';
             </div>
             <div class="hero-right">
                 <div class="hero-photo" id="heroPhotoWrapper" title="<?php echo htmlspecialchars(t('photo_wrapper_title')); ?>">
-                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
-                    <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="<?php echo htmlspecialchars(t('alt_pixel', ['name' => $p['name']])); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
+                    <picture>
+                        <source type="image/webp" srcset="<?php echo htmlspecialchars(is_file(__DIR__ . '/' . preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo'])) ? preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo']) : $p['photo']); ?>">
+                        <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="hero-photo-img active" id="heroPhotoReal" loading="eager" onerror="this.style.display='none';document.getElementById('phFallback').style.display='flex';">
+                    </picture>
+                    <picture>
+                        <source type="image/webp" srcset="<?php echo htmlspecialchars(is_file(__DIR__ . '/' . preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo_avatar'] ?? 'assets/foto-pixel.jpg')) ? preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo_avatar'] ?? 'assets/foto-pixel.jpg') : ($p['photo_avatar'] ?? 'assets/foto-pixel.jpg')); ?>">
+                        <img src="<?php echo htmlspecialchars($p['photo_avatar'] ?? 'assets/foto-pixel.jpg'); ?>" alt="<?php echo htmlspecialchars(t('alt_pixel', ['name' => $p['name']])); ?>" class="hero-photo-img" id="heroPhotoPixel" loading="eager">
+                    </picture>
                     <div class="ph-fallback" id="phFallback" style="display:none;"><?php echo htmlspecialchars($p['initial']); ?></div>
                     <div class="photo-mode-badge" id="photoModeBadge" role="toolbar" aria-label="<?php echo htmlspecialchars(t('photo_mode_aria')); ?>">
                         <button type="button" class="photo-mode-btn active" data-mode="real" title="<?php echo htmlspecialchars(t('mode_real_title')); ?>">

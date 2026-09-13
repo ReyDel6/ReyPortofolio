@@ -10,6 +10,15 @@ $langSwitch = function ($to) use ($selfFile) {
     return $selfFile . '?lang=' . $to;
 };
 
+// Basis URL absolut (untuk canonical & social preview)
+$scheme   = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host     = $_SERVER['HTTP_HOST'] ?? 'localhost';
+$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+$absBase  = $scheme . '://' . $host . $basePath;
+$canonUrl = $absBase . '/' . $selfFile;
+$ogImage  = $absBase . '/assets/portfolio-home-preview.png';
+$ogLocale = ($GLOBALS['LANG'] ?? 'id') === 'en' ? 'en_US' : 'id_ID';
+
 function navLink($href, $label, $key) {
     $act = ($GLOBALS['activePage'] ?? 'index') === $key ? ' active' : '';
     return '<a href="' . htmlspecialchars($href) . '" class="nav-item' . $act . '">' . htmlspecialchars($label) . '</a>';
@@ -44,8 +53,41 @@ function getSocialIcon($label, $size = 20) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($pageTitle); ?></title>
     <meta name="description" content="<?php echo htmlspecialchars(t('meta_desc')); ?>">
+    <meta name="theme-color" content="#0b1020">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonUrl); ?>">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="<?php echo htmlspecialchars($p['name']); ?>">
+    <meta property="og:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta property="og:description" content="<?php echo htmlspecialchars(t('meta_desc')); ?>">
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonUrl); ?>">
+    <meta property="og:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="<?php echo htmlspecialchars($ogLocale); ?>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($pageTitle); ?>">
+    <meta name="twitter:description" content="<?php echo htmlspecialchars(t('meta_desc')); ?>">
+    <meta name="twitter:image" content="<?php echo htmlspecialchars($ogImage); ?>">
+
+    <!-- Preload foto hero (LCP) -->
+    <?php if ($activePage === 'index'):
+        $heroWebp = preg_replace('/\.(jpe?g|png)$/i', '.webp', $p['photo']);
+        $heroWebpAbs = dirname(__DIR__) . '/' . $heroWebp;
+    ?>
+    <link rel="preload" as="image" href="<?php echo htmlspecialchars(is_file($heroWebpAbs) ? $heroWebp : $p['photo']); ?>">
+    <?php endif; ?>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime(__DIR__ . '/../css/style.css'); ?>">
+    <script>
+        (function () {
+            var t = localStorage.getItem('rey-theme');
+            if (!t) t = window.matchMedia && matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <?php if (!empty($googleAnalyticsId)): ?>
@@ -59,6 +101,7 @@ function getSocialIcon($label, $size = 20) {
     <?php endif; ?>
 </head>
 <body>
+    <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
     <!-- SCROLL PROGRESS INDICATOR -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -83,6 +126,10 @@ function getSocialIcon($label, $size = 20) {
             </nav>
 
             <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle tema terang/gelap" title="Ganti tema (terang/gelap)">
+                    <svg class="ic-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+                    <svg class="ic-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+                </button>
                 <div class="lang-switch" role="group" aria-label="<?php echo htmlspecialchars(t('lang_switch_aria')); ?>">
                     <a href="<?php echo htmlspecialchars($langSwitch('id')); ?>" class="lang-btn<?php echo ($GLOBALS['LANG'] ?? 'id') === 'id' ? ' active' : ''; ?>" hreflang="id" title="<?php echo htmlspecialchars(t('lang_id')); ?>">ID</a>
                     <span class="lang-divider"></span>

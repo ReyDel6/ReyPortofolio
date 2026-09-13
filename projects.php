@@ -18,7 +18,7 @@ require __DIR__ . '/inc/header.php';
                 <article class="project-card featured">
                     <div class="project-header">
                         <div class="project-logo-wrapper">
-                            <img src="<?php echo htmlspecialchars($proj['image']); ?>" alt="<?php echo htmlspecialchars($proj['title']); ?>" class="project-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                            <img src="<?php echo htmlspecialchars($proj['image']); ?>" alt="<?php echo htmlspecialchars($proj['title']); ?>" class="project-logo-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                             <div class="proj-fallback" style="display:none;"><?php echo nl2br(htmlspecialchars($proj['initial'])); ?></div>
                         </div>
                         <div class="project-header-info">

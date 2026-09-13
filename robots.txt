@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /assets/experience/
+Sitemap: https://reydel6.github.io/ReyPortofolio/sitemap.xml
