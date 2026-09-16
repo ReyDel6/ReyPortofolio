@@ -311,7 +311,8 @@ a { color: inherit; text-decoration: none; }
         radial-gradient(400px 300px at 50% 40%, rgba(34, 197, 94, 0.05), transparent 70%),
         var(--bg);
 }
-.hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; position: relative; z-index: 2; }
+.hero-inner { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 48px; align-items: center; position: relative; z-index: 2; }
+.hero-left, .hero-right { min-width: 0; }
 .hero-eyebrow {
     color: var(--accent);
     font-weight: 700;
@@ -2243,6 +2244,7 @@ a { color: inherit; text-decoration: none; }
     position: relative;
     overflow: hidden;
     width: 100%;
+    min-width: 0;
     padding: 14px 0;
     margin: 10px 0 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);

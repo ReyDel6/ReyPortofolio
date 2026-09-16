@@ -262,11 +262,15 @@ if (heroPhotoWrapper) {
     let isHovered = false;
 
     const setPhotoMode = (mode) => {
+        const realBroken = heroPhotoWrapper.classList.contains('real-broken');
+        if (realBroken && mode === 'real') {
+            mode = 'pixel';
+        }
         currentMode = mode;
         const isPixel = mode === 'pixel';
 
         if (photoReal && photoPixel) {
-            photoReal.classList.toggle('active', !isPixel);
+            photoReal.classList.toggle('active', !isPixel && !realBroken);
             photoPixel.classList.toggle('active', isPixel);
         }
 
