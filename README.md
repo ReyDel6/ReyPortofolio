@@ -112,7 +112,8 @@ Setelah mengubah data, halaman otomatis ter-update tanpa mengedit template. Teks
 |------|-----|
 | `index.php` | Beranda — hero + menu utama |
 | `about.php` | Tentang, pengalaman profesional, pendidikan, pelatihan |
-| `projects.php` | Proyek beserta modal detail setiap proyek |
+| `projects.php` | Proyek — grid kartu kompak + badge jumlah proyek |
+| `project-detail.php` | Detail proyek per proyek (`?p=<index>`), navigasi prev/next |
 | `certificates.php` | Skill & ekosistem teknologi, sertifikat & lisensi |
 | `contact.php` | Kontak & kanal sosial media |
 

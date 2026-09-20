@@ -53,7 +53,7 @@ if (spyAnchors.length > 0) {
 }
 
 // Reveal on scroll (fade-up)
-const revealEls = document.querySelectorAll('.section, .project-card, .skill-card, .tl-card, .contact-card, .edu-card');
+const revealEls = document.querySelectorAll('.section, .project-card, .skill-card, .tl-card, .contact-card, .edu-card, .proj-detail-card');
 const io = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
