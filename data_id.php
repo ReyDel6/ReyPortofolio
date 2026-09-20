@@ -99,8 +99,7 @@ $projects = [
             'Customer — akun scan QR meja & pembayaran online dengan dashboard & riwayat order sendiri.',
         ],
         'hki'      => 'Proyek <strong>UMKM Connect</strong> — termasuk source code, desain antarmuka, logo, dan fitur — adalah karya orisinal milik <strong>Reynaldi Delphiano</strong>, dilindungi Hak Cipta dan dicatatkan di DJKI (HKI <strong>EC002026133137</strong>, 2026). Dilarang menggandakan, mendistribusikan, atau mengomersialkan tanpa izin tertulis pemegang hak.',
-        'previews' => [
-            ['file' => 'assets/umkm-web-marketplace-preview.webp', 'label' => 'Marketplace B2B UMKM'],
+'previews' => [
             ['file' => 'assets/umkm-web-login-preview.webp', 'label' => 'Halaman Login'],
         ],
     ],

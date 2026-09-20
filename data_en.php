@@ -100,8 +100,7 @@ $projects = [
             'Customer — QR table account & online payment with their own dashboard & order history.',
         ],
         'hki'      => 'The <strong>UMKM Connect</strong> project — including source code, interface design, logo, and features — is original work owned by <strong>Reynaldi Delphiano</strong>, protected by copyright and registered with DJKI (HKI <strong>EC002026133137</strong>, 2026). Copying, distributing, or commercializing without the written permission of the rights holder is prohibited.',
-        'previews' => [
-            ['file' => 'assets/umkm-web-marketplace-preview.webp', 'label' => 'UMKM B2B Marketplace'],
+'previews' => [
             ['file' => 'assets/umkm-web-login-preview.webp', 'label' => 'Login Page'],
         ],
     ],
