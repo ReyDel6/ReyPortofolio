@@ -132,8 +132,7 @@ $projects = [
             'Cashier — fast sales transactions through the POS interface.',
             'Owner — views sales reports & business recaps.',
         ],
-        'previews' => [
-            ['file' => 'assets/posmart-dashboard-preview.png', 'label' => 'Admin Dashboard'],
+'previews' => [
             ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Product Catalog & Cashier'],
             ['file' => 'assets/posmart-products-preview.png', 'label' => 'Product Management'],
             ['file' => 'assets/posmart-login-preview.png', 'label' => 'Login Page'],
