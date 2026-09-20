@@ -43,7 +43,7 @@ $projects = [
         'title'    => 'PPDB SMK Nusantara Bangsa',
         'tag'      => 'Personal Work • Web Development',
         'badge'    => 'Online PPDB Web',
-        'image'    => 'assets/ppdb-preview.svg',
+        'image'    => 'assets/ppdb-home-preview.png',
         'initial'  => 'PPDB SMK',
         'github'   => 'https://github.com/ReyDel6/ppdb-sekolah-web',
         'desc'     => 'An <strong>Online Student Admission (PPDB)</strong> system for SMK Nusantara Bangsa — an <strong>Uji Kompetensi Keahlian (UJK/UKK RPL)</strong> project. Handles prospective student registration through a multi-step form with document upload, a public status-check portal with QR-bearing participant card printing, a multi-role admin dashboard, and Excel report export.',
@@ -61,6 +61,10 @@ $projects = [
             'Database: MySQL',
             'Reports: Laravel Excel',
             'QR Code: qrcodejs',
+        ],
+        'previews' => [
+            ['file' => 'assets/ppdb-home-preview.png', 'label' => 'Landing Page'],
+            ['file' => 'assets/ppdb-login-preview.png', 'label' => 'Login Page'],
         ],
     ],
     [
