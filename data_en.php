@@ -27,6 +27,8 @@ $profile = [
         ['label' => 'TikTok',      'handle' => '@rajajasa7',             'url' => 'https://www.tiktok.com/@rajajasa7/'],
         ['label' => 'YouTube',     'handle' => '@reynaldidelphiano5684', 'url' => 'https://www.youtube.com/@reynaldidelphiano5684'],
         ['label' => 'GitHub',      'handle' => 'ReyDel6',                'url' => 'https://github.com/ReyDel6'],
+        ['label' => 'Discord',     'handle' => 'delphianor',             'url' => 'https://discord.com/users/delphianor'],
+        ['label' => 'Threads',     'handle' => '@reynaldi_delphiano', 'url' => 'https://www.threads.com/@reynaldi_delphiano'],
     ],
     'photo'         => 'assets/foto.jpeg',
     'photo_avatar'  => 'assets/foto-pixel.jpg',
@@ -562,10 +564,16 @@ $trainings = [
         'icon'        => '💻',
         'badge'       => 'BNSP Certificate',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['React.js', 'TypeScript', 'Tailwind CSS', 'JavaScript', 'Node.js', 'Vite', 'MySQL', 'Firebase'],
         'items'       => [
             'Building modern web interfaces using React in a software development training program.',
             'Developing interactive web applications, managing component state, and connecting the frontend with backend/API.',
             'Applying clean code, performance efficiency, and modern development tools.',
+        ],
+        'results'    => [
+            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Catalog & Cashier'],
+            ['image' => 'assets/posmart-products-preview.png', 'label' => 'POSMart — Product Management'],
+            ['image' => 'assets/posmart-login-preview.png', 'label' => 'POSMart — Login Page'],
         ],
     ],
     [
@@ -577,11 +585,16 @@ $trainings = [
         'icon'        => '🎨',
         'badge'       => 'BNSP Certificate',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign'],
         'items'       => [
             'Mastered design principles, typography, and composition to produce aesthetic and communicative visual materials.',
             'Used Adobe Photoshop, Adobe Illustrator, and Adobe InDesign for photos, vectors, logos, illustrations, and multipage documents.',
             'Completed branding projects, flyers, posters, banners, and basic UI for both print and digital media.',
             'Understood the design workflow from concept and execution to pre-press or digital publication.',
+        ],
+        'results'    => [
+            ['image' => 'assets/moodboard-ujk.png', 'label' => 'UJK Graphic Design Moodboard'],
+            ['image' => 'assets/hasil-flyer-ujk.png', 'label' => 'UJK Graphic Design Flyer Result'],
         ],
     ],
     [
@@ -609,6 +622,7 @@ $trainings = [
         'icon'        => '📊',
         'badge'       => 'PPKPI',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['Microsoft Office', 'Excel'],
         'items'       => [
             'Vocational & competency training program in the Computer Operator field.',
             'Advanced Office Suite operation for administrative needs, spreadsheet data analysis, and professional reports.',

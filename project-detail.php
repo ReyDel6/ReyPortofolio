@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/data.php';
+require_once __DIR__ . '/inc/tech-icons.php';
 $pid = (int) ($_GET['p'] ?? -1);
 if (!isset($projects[$pid])) {
     header('Location: projects.php');
@@ -53,7 +54,7 @@ $nextProj = $projects[$nextIdx];
                     <h4 class="proj-sub"><?php echo t('proj_techstack'); ?></h4>
                     <div class="proj-chips">
                         <?php foreach ($proj['tech'] as $t): ?>
-                            <span class="proj-chip"><?php echo htmlspecialchars($t); ?></span>
+                            <?php echo renderTechChip($t); ?>
                         <?php endforeach; ?>
                     </div>
                 </div>

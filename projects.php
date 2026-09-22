@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/data.php';
+require_once __DIR__ . '/inc/tech-icons.php';
 $activePage = 'projects';
 $pageTitle  = t('projects_title_all') . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
@@ -44,7 +45,7 @@ require __DIR__ . '/inc/header.php';
                         <?php if (!empty($proj['tech'])): ?>
                         <div class="proj-chips proj-tile-chips">
                             <?php foreach (array_slice($proj['tech'], 0, 4) as $t): ?>
-                            <span class="proj-chip"><?php echo htmlspecialchars($t); ?></span>
+                            <?php echo renderTechChip($t); ?>
                             <?php endforeach; ?>
                             <?php if (count($proj['tech']) > 4): ?>
                             <span class="proj-chip proj-chip-more">+<?php echo count($proj['tech']) - 4; ?></span>

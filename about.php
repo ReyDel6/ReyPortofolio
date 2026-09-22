@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/data.php';
+require_once __DIR__ . '/inc/tech-icons.php';
 $activePage = 'about';
 $pageTitle  = t('about_title_all') . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
@@ -192,6 +193,9 @@ require __DIR__ . '/inc/header.php';
                         </div>
                         <div>
                             <h4><?php echo htmlspecialchars($training['title']); ?></h4>
+                            <?php if (!empty($training['category'])): ?>
+                            <span class="training-track"><?php echo htmlspecialchars($training['category']); ?></span>
+                            <?php endif; ?>
                             <p class="training-org"><?php echo htmlspecialchars($training['org']); ?></p>
                         </div>
                     </div>
@@ -202,18 +206,38 @@ require __DIR__ . '/inc/header.php';
                         <?php endif; ?>
                     </div>
                     <div class="training-tags">
-                        <?php if (!empty($training['category'])): ?>
-                        <span class="tl-badge training-badge"><?php echo htmlspecialchars($training['category']); ?></span>
-                        <?php endif; ?>
                         <?php if (!empty($training['badge'])): ?>
                         <span class="training-cert-badge">✓ <?php echo htmlspecialchars($training['badge']); ?></span>
                         <?php endif; ?>
                     </div>
+                    <?php if (!empty($training['tech'])): ?>
+                    <div class="proj-chips training-tech">
+                        <?php foreach ($training['tech'] as $t): ?>
+                        <?php echo renderTechChip($t); ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif; ?>
                     <ul>
                         <?php foreach ($training['items'] as $item): ?>
                         <li><?php echo htmlspecialchars($item); ?></li>
                         <?php endforeach; ?>
                     </ul>
+                    <?php if (!empty($training['results'])): ?>
+                    <div class="training-results">
+                        <h5><?php echo htmlspecialchars(t('training_results')); ?></h5>
+                        <div class="training-results-grid">
+                            <?php foreach ($training['results'] as $result): ?>
+                            <figure class="training-result-item">
+                                <a href="<?php echo htmlspecialchars($result['image']); ?>" target="_blank" rel="noopener" title="<?php echo htmlspecialchars($result['label']); ?>">
+                                    <img src="<?php echo htmlspecialchars($result['image']); ?>" alt="<?php echo htmlspecialchars($result['label']); ?>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
+                                    <span class="training-result-fallback" style="display:none;">🖼️</span>
+                                </a>
+                                <figcaption><?php echo htmlspecialchars($result['label']); ?></figcaption>
+                            </figure>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                 </article>
                 <?php endforeach; ?>
             </div>

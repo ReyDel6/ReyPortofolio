@@ -26,6 +26,8 @@ $profile = [
         ['label' => 'TikTok',      'handle' => '@rajajasa7',             'url' => 'https://www.tiktok.com/@rajajasa7/'],
         ['label' => 'YouTube',     'handle' => '@reynaldidelphiano5684', 'url' => 'https://www.youtube.com/@reynaldidelphiano5684'],
         ['label' => 'GitHub',      'handle' => 'ReyDel6',                'url' => 'https://github.com/ReyDel6'],
+        ['label' => 'Discord',     'handle' => 'delphianor',             'url' => 'https://discord.com/users/delphianor'],
+        ['label' => 'Threads',     'handle' => '@reynaldi_delphiano', 'url' => 'https://www.threads.com/@reynaldi_delphiano'],
     ],
     'photo'         => 'assets/foto.jpeg',
     'photo_avatar'  => 'assets/foto-pixel.jpg',
@@ -561,10 +563,16 @@ $trainings = [
         'icon'        => '💻',
         'badge'       => 'Sertifikat BNSP',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['React.js', 'TypeScript', 'Tailwind CSS', 'JavaScript', 'Node.js', 'Vite', 'MySQL', 'Firebase'],
         'items'       => [
             'Membangun antarmuka web modern menggunakan React dalam program pelatihan pengembangan perangkat lunak.',
             'Mengembangkan aplikasi web interaktif, mengelola state komponen, serta menghubungkan frontend dengan backend/API.',
             'Menerapkan clean code, efisiensi performa, dan modern development tools.',
+        ],
+        'results'    => [
+            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Katalog & Kasir'],
+            ['image' => 'assets/posmart-products-preview.png', 'label' => 'POSMart — Manajemen Produk'],
+            ['image' => 'assets/posmart-login-preview.png', 'label' => 'POSMart — Halaman Login'],
         ],
     ],
     [
@@ -576,11 +584,16 @@ $trainings = [
         'icon'        => '🎨',
         'badge'       => 'Sertifikat BNSP',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['Adobe Photoshop', 'Adobe Illustrator', 'Adobe InDesign'],
         'items'       => [
             'Menguasai prinsip desain, tipografi, dan komposisi untuk menghasilkan materi visual yang estetis dan komunikatif.',
             'Menggunakan Adobe Photoshop, Adobe Illustrator, dan Adobe InDesign untuk foto, vektor, logo, ilustrasi, serta dokumen multipage.',
             'Menyelesaikan proyek branding, flyer, poster, banner, dan UI dasar untuk media cetak maupun digital.',
             'Memahami alur kerja desain dari konsep, eksekusi, hingga pre-press atau publikasi digital.',
+        ],
+        'results'    => [
+            ['image' => 'assets/moodboard-ujk.png', 'label' => 'Moodboard UJK Desain Grafis'],
+            ['image' => 'assets/hasil-flyer-ujk.png', 'label' => 'Hasil Flyer UJK Desain Grafis'],
         ],
     ],
     [
@@ -608,6 +621,7 @@ $trainings = [
         'icon'        => '📊',
         'badge'       => 'PPKPI',
         'logo'        => 'assets/logo-ppkpi.jpeg',
+        'tech'        => ['Microsoft Office', 'Excel'],
         'items'       => [
             'Program pelatihan vokasi & kompetensi bidang Operator Komputer.',
             'Pengoperasian Office Suite tingkat lanjut untuk kebutuhan administrasi, analisa lembar kerja data, dan laporan profesional.',

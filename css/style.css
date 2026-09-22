@@ -797,6 +797,18 @@ a { color: inherit; text-decoration: none; }
     border-color: rgba(124, 92, 240, 0.2);
     color: #c9bffa;
 }
+.proj-chip-tech {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.proj-chip-icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    display: inline-block;
+    flex-shrink: 0;
+}
 
 .proj-links {
     margin-top: 24px;
@@ -1303,8 +1315,11 @@ a { color: inherit; text-decoration: none; }
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 18px;
+    align-items: start;
 }
 .training-card {
+    display: flex;
+    flex-direction: column;
     background: rgba(22, 32, 63, 0.72);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
@@ -1323,6 +1338,7 @@ a { color: inherit; text-decoration: none; }
     display: flex;
     align-items: flex-start;
     gap: 14px;
+    min-height: 64px;
 }
 .training-icon {
     display: grid;
@@ -1345,6 +1361,14 @@ a { color: inherit; text-decoration: none; }
 .training-card h4 {
     color: #ffffff;
     font-size: 1.05rem;
+    margin-bottom: 3px;
+}
+.training-track {
+    display: inline-block;
+    color: #a6b6ff;
+    font-size: .72rem;
+    font-weight: 700;
+    line-height: 1.2;
     margin-bottom: 4px;
 }
 .training-org {
@@ -1367,9 +1391,22 @@ a { color: inherit; text-decoration: none; }
     border: 1px solid rgba(120, 140, 220, 0.12);
 }
 .training-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
-.training-badge { display: inline-block; margin-bottom: 0; }
+.training-tech { margin: 14px 0 0; gap: 7px; }
+.training-tech .proj-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 30px;
+    padding: 5px 10px;
+}
+.training-tech .proj-chip-icon {
+    width: 16px;
+    height: 16px;
+}
 .training-cert-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
     padding: 3px 9px;
     border-radius: 6px;
     background: rgba(250, 204, 21, 0.12);
@@ -1397,6 +1434,60 @@ a { color: inherit; text-decoration: none; }
     left: 0;
     color: #86efac;
     font-weight: 700;
+}
+.training-results {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px dashed rgba(120, 140, 220, 0.2);
+}
+.training-results h5 {
+    color: #86efac;
+    font-size: .78rem;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-bottom: 10px;
+}
+.training-results-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.training-result-item {
+    margin: 0;
+}
+.training-result-item a {
+    display: block;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #0d1326;
+    border: 1px solid var(--border);
+    transition: border-color .2s, transform .2s;
+}
+.training-result-item a:hover {
+    border-color: #22c55e;
+    transform: translateY(-2px);
+}
+.training-result-item img {
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    object-position: top center;
+    display: block;
+    background: #0d1326;
+}
+.training-result-fallback {
+    display: grid;
+    place-items: center;
+    height: 120px;
+    font-size: 1.5rem;
+    color: var(--text-dim);
+}
+.training-result-item figcaption {
+    margin-top: 6px;
+    font-size: .74rem;
+    color: var(--text-dim);
+    text-align: center;
+    line-height: 1.35;
 }
 
 /* ---------- CERTIFICATIONS ---------- */
@@ -1836,6 +1927,15 @@ a { color: inherit; text-decoration: none; }
 .social-ico-youtube {
     background: linear-gradient(135deg, #ff0000, #cc0000);
     box-shadow: 0 6px 18px rgba(255, 0, 0, 0.3);
+}
+.social-ico-discord {
+    background: linear-gradient(135deg, #7289da, #5865f2);
+    box-shadow: 0 6px 18px rgba(88, 101, 242, 0.35);
+}
+.social-ico-threads {
+    background: linear-gradient(135deg, #3b3b3b, #000000);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .contact-info {

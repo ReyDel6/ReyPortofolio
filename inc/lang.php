@@ -110,6 +110,7 @@ $GLOBALS['TXT'] = [
         'training_tag'       => 'Pengembangan',
         'training_heading'   => 'Pelatihan Profesional',
         'training_subdesc'   => 'Program pelatihan kerja dan vokasi yang pernah diikuti di PPKPI.',
+        'training_results'   => 'Hasil Pelatihan',
         'alt_logo'           => 'Logo {org}',
 
         // PROJECTS
@@ -251,6 +252,7 @@ $GLOBALS['TXT'] = [
         'training_tag'       => 'Development',
         'training_heading'   => 'Professional Training',
         'training_subdesc'   => 'Workforce and vocational training programs attended at PPKPI.',
+        'training_results'   => 'Training Results',
         'alt_logo'           => 'Logo of {org}',
 
         // PROJECTS
