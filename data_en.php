@@ -40,6 +40,44 @@ $profile = [
     ],
 ];
 
+$services = [
+    [
+        'icon'  => '🛒',
+        'title' => 'POS / Cashier App & Online Store',
+        'desc'  => 'Point of sale, product catalog, promos & bundles, member points, and QRIS payments — fullstack (React + Laravel).',
+        'href'  => 'project-detail.php?p=2',
+        'cta'   => 'View example (POSMart) →',
+    ],
+    [
+        'icon'  => '📱',
+        'title' => 'MSME Mobile App',
+        'desc'  => 'Cross-platform Flutter app to manage catalog, stock, transactions, and reports right from your pocket.',
+        'href'  => 'project-detail.php?p=4',
+        'cta'   => 'View example (Mobile) →',
+    ],
+    [
+        'icon'  => '🌐',
+        'title' => 'Business Website & Portfolio',
+        'desc'  => 'Company profile, landing pages, and portfolio websites that are responsive, fast, and bilingual (ID/EN).',
+        'href'  => 'project-detail.php?p=3',
+        'cta'   => 'View example (This Web) →',
+    ],
+    [
+        'icon'  => '🔌',
+        'title' => 'REST API & Integrations',
+        'desc'  => 'Laravel backend, clean REST APIs, authentication (Google OAuth), and Midtrans payment integration.',
+        'href'  => 'project-detail.php?p=1',
+        'cta'   => 'View example (UMKM Connect) →',
+    ],
+    [
+        'icon'  => '🛠️',
+        'title' => 'Maintenance & Further Development',
+        'desc'  => 'Regular maintenance, feature updates, bug fixes, security, and additional feature development.',
+        'href'  => 'contact.php',
+        'cta'   => 'Discuss your needs →',
+    ],
+];
+
 $projects = [
     [
         'title'    => 'PPDB SMK Nusantara Bangsa',
@@ -113,31 +151,34 @@ $projects = [
         'tag'      => 'Personal Work • Fullstack',
         'badge'    => 'Point of Sale',
         'image'    => 'assets/posmart-preview.svg',
+        'logo'     => 'assets/posmart-logo.svg',
         'initial'  => 'POSMart',
         'github'   => 'https://github.com/ReyDel6/POSMART',
-        'desc'     => 'A web-based <strong>Point of Sale (POS)</strong> application for managing sales, products, stock, and reports — with a multi-role dashboard (Admin, Cashier, Owner) and Google login.',
+        'desc'     => 'A web-based <strong>Point of Sale (POS) + Digital Minimarket</strong>: sales, products, stock, shipping zones, and reports management — complete with a public storefront, promos & bundles, member points, and QRIS (Midtrans) payments.',
         'points'   => [
-            '<strong>Multi-role dashboard</strong> — Admin (manage users & products), Cashier (fast POS transactions), Owner (sales reports & summaries).',
-            '<strong>Modern cashier UI</strong> — product catalog, shopping cart, discounts, and quick checkout.',
-            '<strong>Product & stock management</strong> — add/edit products, categories, prices, and stock in real time.',
-            '<strong>Google authentication</strong> — quick login with a Google account in addition to email & password.',
-            '<strong>Sales summary</strong> — statistic cards and periodic recap reports.',
+            '<strong>Minimarket storefront</strong> — product catalog, search & category filters, product detail pages, promo hero & marquee, bundles, and customer product reviews.',
+            '<strong>Full multi-role</strong> — Admin (products, promos, shipping zones, staff), Cashier (fast POS), Owner (reports & restock analytics), Supplier (products appear in the marketplace), Customer (own order dashboard).',
+            '<strong>Modern cashier UI</strong> — shopping cart, discounts, QRIS/Midtrans invoices, and real-time order management.',
+            '<strong>Points &amp; loyalty</strong> — member coins collected on every transaction, redeemable as discounts.',
+            '<strong>Modern Neo-Bold design</strong> — frontend fully revamped: cream palette, neon accents, hard shadows, bold typography, fully responsive.',
         ],
-        'meta'     => 'Technology: <strong>React + Vite + Tailwind (Frontend)</strong> • <strong>Laravel (PHP API Backend)</strong> • SQLite • Google OAuth integration • Reports',
+        'meta'     => 'Technology: <strong>React + Vite + Tailwind CSS 4 (Frontend)</strong> • <strong>Laravel (PHP API Backend)</strong> • MySQL • Google OAuth • Midtrans QRIS • Multi-role',
         'tech'     => [
-            'Frontend: React.js + Vite, Tailwind CSS, Material Tailwind',
+            'Frontend: React.js + Vite, Tailwind CSS 4, Material Tailwind',
             'Backend: Laravel (PHP) — REST API',
-            'Database: SQLite',
-            'Auth: Email/Password + Google OAuth',
+            'Database: MySQL',
+            'Payments: QRIS Midtrans · Auth: Google OAuth + Email/Password',
         ],
         'roles'    => [
-            'Admin — manages users, products, and master data.',
+            'Admin — manages users, products, promos, categories, and shipping zones.',
             'Cashier — fast sales transactions through the POS interface.',
-            'Owner — views sales reports & business recaps.',
+            'Owner — sales reports, restock analytics, and business recaps.',
+            'Supplier — products can be shown in the marketplace.',
+            'Customer — QR table scan, online payment, and personal order history dashboard.',
         ],
 'previews' => [
-            ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Product Catalog & Cashier'],
-            ['file' => 'assets/posmart-products-preview.png', 'label' => 'Product Management'],
+            ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Storefront & Cashier (Neo-Bold design)'],
+            ['file' => 'assets/posmart-products-preview.png', 'label' => 'Product Management (Admin Panel)'],
             ['file' => 'assets/posmart-login-preview.png', 'label' => 'Login Page'],
         ],
     ],
@@ -146,6 +187,7 @@ $projects = [
         'tag'      => 'Personal Work • Reynaldi Delphiano',
         'badge'    => 'Personal Web',
         'image'    => 'assets/portfolio-preview.svg',
+        'logo'     => 'assets/reydel-logo.svg',
         'initial'  => 'RD Portfolio',
         'github'   => 'https://github.com/ReyDel6/ReyPortofolio',
         'live'     => 'http://reydel.page.gd/',
@@ -171,6 +213,7 @@ $projects = [
         'tag'      => 'Personal Work • Mobile Development',
         'badge'    => 'Flutter Mobile App',
         'image'    => 'assets/umkm-connect-mobile.svg',
+        'logo'     => 'assets/umkm-connect-logo.png',
         'initial'  => 'UMKM Connect Mobile',
         'desc'     => 'A Flutter-based <strong>UMKM Connect</strong> mobile version to help MSMEs manage operations, catalog, stock, transactions, reports, and connections with customers and suppliers from their smartphone.',
         'points'   => [
@@ -329,6 +372,39 @@ $projects = [
         ],
         'previews' => [
             ['file' => 'assets/gudang-login.webp', 'label' => 'Login Page'],
+        ],
+    ],
+    [
+        'title'    => 'Digital Wedding Invitation',
+        'tag'      => 'Personal Work • Web Development',
+        'badge'    => 'Digital Invitation',
+        'image'    => 'assets/undangan-preview.svg',
+        'logo'     => 'assets/undangan-logo.svg',
+        'initial'  => 'Wedding',
+        'github'   => 'https://github.com/ReyDel6/wedding-invitation',
+        'live'     => 'https://undangan-nikah-ruby.vercel.app',
+        'desc'     => 'An interactive <strong>digital wedding invitation</strong> single-page app built with <strong>React + Vite + Tailwind CSS 4</strong> — an opening screen with a couple photo, background music, countdown, event schedule, gallery, WhatsApp RSVP, a digital gift envelope, and guest wishes & prayers, with all content managed through a single config file.',
+        'points'   => [
+            '<strong>Opening screen</strong> — gold-framed couple photo, "Open Invitation" button, and personal guest greeting via <code>?to=Name</code>.',
+            '<strong>Background music</strong> — soft auto-play with a floating mute toggle in the corner.',
+            '<strong>Real-time countdown</strong> — counts down to the wedding day.',
+            '<strong>Event schedule</strong> — Akad & Reception details with venue and Google Maps links.',
+            '<strong>WhatsApp RSVP</strong> — automatic attendance confirmation without a backend.',
+            '<strong>Digital gift envelope</strong> — bank account numbers, copy button, and QRIS image.',
+            '<strong>Wishes & prayers</strong> — guests leave messages stored in per-device localStorage.',
+            '<strong>Elegant design</strong> — cream & gold palette, Playfair Display typography, and falling petal animation.',
+        ],
+        'meta'     => 'Technology: <strong>React 19 + Vite + Tailwind CSS 4</strong> • lucide-react • Google Fonts • Static deploy',
+        'tech'     => [
+            'Frontend: React 19 + Vite',
+            'Styling: Tailwind CSS 4 (@theme custom palette)',
+            'Icons: lucide-react',
+            'Fonts: Playfair Display & Inter (Google Fonts)',
+            'Deploy: static build (dist/) — Vercel/Netlify/GitHub Pages ready',
+        ],
+        'previews' => [
+            ['file' => 'assets/undangan-cover-preview.png', 'label' => 'Opening Screen (Cover)'],
+            ['file' => 'assets/undangan-invitation-preview.png', 'label' => 'Invitation Page (Mobile)'],
         ],
     ],
 ];
@@ -573,7 +649,7 @@ $trainings = [
             'Applying clean code, performance efficiency, and modern development tools.',
         ],
         'results'    => [
-            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Catalog & Cashier'],
+            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Neo-Bold Storefront'],
             ['image' => 'assets/posmart-products-preview.png', 'label' => 'POSMart — Product Management'],
             ['image' => 'assets/posmart-login-preview.png', 'label' => 'POSMart — Login Page'],
         ],
@@ -614,6 +690,9 @@ $trainings = [
             'Operating system installation, driver management, local network configuration, and system performance optimization.',
             'Performed hardware/software failure analysis (troubleshooting) and repairs according to technical standards.',
         ],
+        'results'    => [
+            ['image' => 'assets/experience/activity-teknisi-komputer.jpeg', 'label' => 'Computer Technician Training Activity'],
+        ],
     ],
     [
         'title'       => 'Computer Operator',
@@ -629,6 +708,10 @@ $trainings = [
             'Vocational & competency training program in the Computer Operator field.',
             'Advanced Office Suite operation for administrative needs, spreadsheet data analysis, and professional reports.',
             'Computer system management, structured digital file management, and maintenance of productivity support systems.',
+        ],
+        'results'    => [
+            ['image' => 'assets/experience/activity-operator-komputer.jpeg', 'label' => 'Computer Operator Activity'],
+            ['image' => 'assets/experience/activity-operator-komputer-2.jpeg', 'label' => 'Computer Operator Activity (2)'],
         ],
     ],
 ];

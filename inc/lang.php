@@ -84,6 +84,11 @@ $GLOBALS['TXT'] = [
         'explore_contact_d'  => 'Hubungi saya melalui email, WhatsApp, LinkedIn, dan sosial media lain.',
         'explore_arrow'      => 'Buka Halaman →',
 
+        // SERVICE / LAYANAN
+        'service_tag'        => 'Layanan',
+        'service_heading'    => 'Jasa & Layanan',
+        'service_subdesc'    => 'Saya membantu mengubah ide menjadi aplikasi web & mobile yang siap dipakai. Setiap layanan disertai contoh proyek nyata.',
+
         // ABOUT
         'about_title_all'    => 'Tentang & Pengalaman',
         'about_tag'          => 'Tentang Saya',
@@ -225,6 +230,11 @@ $GLOBALS['TXT'] = [
         'explore_contact_t'  => 'Contact',
         'explore_contact_d'  => 'Reach me via email, WhatsApp, LinkedIn, and other social media.',
         'explore_arrow'      => 'Open Page →',
+
+        // SERVICE / LAYANAN
+        'service_tag'        => 'Services',
+        'service_heading'    => 'Services & Offerings',
+        'service_subdesc'    => 'I turn ideas into production-ready web & mobile apps. Every service comes with a real project example.',
 
         // ABOUT
         'about_title_all'    => 'About & Experience',

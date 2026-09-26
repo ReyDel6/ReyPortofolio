@@ -68,6 +68,27 @@ require __DIR__ . '/inc/header.php';
         </div>
     </section>
 
+    <!-- LAYANAN / JASA -->
+    <section class="section" id="layanan">
+        <div class="container">
+            <div class="section-head">
+                <span class="tag"><?php echo t('service_tag'); ?></span>
+                <h2><?php echo t('service_heading'); ?></h2>
+                <p class="section-subdesc"><?php echo htmlspecialchars(t('service_subdesc')); ?></p>
+            </div>
+            <div class="explore-grid services-grid">
+                <?php foreach ($services as $svc): ?>
+                <a class="explore-card service-card" href="<?php echo htmlspecialchars($svc['href']); ?>">
+                    <span class="explore-icon"><?php echo htmlspecialchars($svc['icon']); ?></span>
+                    <h3><?php echo htmlspecialchars($svc['title']); ?></h3>
+                    <p><?php echo htmlspecialchars($svc['desc']); ?></p>
+                    <span class="explore-arrow"><?php echo htmlspecialchars($svc['cta']); ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
     <!-- JELAJAH (Quick Links ala halaman multi-page) -->
     <section class="section" id="jelajah">
         <div class="container">

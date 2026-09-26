@@ -27,7 +27,7 @@ $nextProj = $projects[$nextIdx];
             <article class="project-card proj-detail-card">
                 <div class="proj-modal-head">
                     <div class="proj-modal-logo">
-                        <img src="<?php echo htmlspecialchars($proj['image']); ?>" alt="<?php echo htmlspecialchars($proj['title']); ?>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                        <img src="<?php echo htmlspecialchars($proj['logo'] ?? $proj['image']); ?>" alt="<?php echo htmlspecialchars($proj['title']); ?>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
                         <div class="proj-fallback" style="display:none;"><?php echo nl2br(htmlspecialchars($proj['initial'])); ?></div>
                     </div>
                     <div class="proj-modal-title">

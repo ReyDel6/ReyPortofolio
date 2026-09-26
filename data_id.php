@@ -39,6 +39,44 @@ $profile = [
     ],
 ];
 
+$services = [
+    [
+        'icon'  => '🛒',
+        'title' => 'Aplikasi Kasir (POS) & Toko Online',
+        'desc'  => 'Point of sale, katalog produk, promo & paket, poin member, dan pembayaran QRIS — fullstack (React + Laravel).',
+        'href'  => 'project-detail.php?p=2',
+        'cta'   => 'Lihat contoh (POSMart) →',
+    ],
+    [
+        'icon'  => '📱',
+        'title' => 'Aplikasi Mobile UMKM',
+        'desc'  => 'Flutter cross-platform untuk mengelola katalog, stok, transaksi, dan laporan langsung dari genggaman.',
+        'href'  => 'project-detail.php?p=4',
+        'cta'   => 'Lihat contoh (Mobile) →',
+    ],
+    [
+        'icon'  => '🌐',
+        'title' => 'Website Bisnis & Portofolio',
+        'desc'  => 'Company profile, landing page, dan website portofolio yang responsif, cepat, dan bilingual (ID/EN).',
+        'href'  => 'project-detail.php?p=3',
+        'cta'   => 'Lihat contoh (Web Ini) →',
+    ],
+    [
+        'icon'  => '🔌',
+        'title' => 'REST API & Integrasi',
+        'desc'  => 'Backend Laravel, REST API yang rapi, autentikasi (Google OAuth), dan integrasi pembayaran Midtrans.',
+        'href'  => 'project-detail.php?p=1',
+        'cta'   => 'Lihat contoh (UMKM Connect) →',
+    ],
+    [
+        'icon'  => '🛠️',
+        'title' => 'Maintenance & Pengembangan Lanjutan',
+        'desc'  => 'Perawatan berkala, update fitur, perbaikan bug, keamanan, dan pengembangan fitur tambahan.',
+        'href'  => 'contact.php',
+        'cta'   => 'Diskusikan kebutuhan →',
+    ],
+];
+
 $projects = [
     [
         'title'    => 'PPDB SMK Nusantara Bangsa',
@@ -112,31 +150,34 @@ $projects = [
         'tag'      => 'Karya Pribadi • Fullstack',
         'badge'    => 'Point of Sale',
         'image'    => 'assets/posmart-preview.svg',
+        'logo'     => 'assets/posmart-logo.svg',
         'initial'  => 'POSMart',
         'github'   => 'https://github.com/ReyDel6/POSMART',
-        'desc'     => 'Aplikasi <strong>Point of Sale (POS)</strong> berbasis web untuk manajemen penjualan, produk, stok, dan laporan — dengan dashboard multi-role (Admin, Kasir, Owner) dan login Google.',
+        'desc'     => 'Aplikasi <strong>Point of Sale (POS) + Minimarket Digital</strong> berbasis web: manajemen penjualan, produk, stok, zona pengiriman, dan laporan — lengkap dengan storefront publik, promo & paket, poin member, hingga pembayaran QRIS (Midtrans).',
         'points'   => [
-            '<strong>Dashboard multi-role</strong> — Admin (kelola pengguna & produk), Kasir (transaksi POS cepat), Owner (laporan & rekap penjualan).',
-            '<strong>Kasir modern</strong> — katalog produk, keranjang belanja, diskon, dan proses checkout cepat.',
-            '<strong>Manajemen produk &amp; stok</strong> — tambah/ubah produk, kategori, harga, dan stok secara real-time.',
-            '<strong>Autentikasi Google</strong> — login cepat dengan akun Google selain email & password.',
-            '<strong>Ringkasan penjualan</strong> — kartu statistik dan laporan rekap per periode.',
+            '<strong>Storefront minimarket</strong> — katalog produk, pencarian & filter kategori, halaman detail produk, hero promo & marquee, paket bundling, dan ulasan produk dari pembeli.',
+            '<strong>Multi-role lengkap</strong> — Admin (produk, promo, zona ongkir, staf), Kasir (POS cepat), Owner (laporan & analitik restock), Supplier (produk tampil di marketplace), Customer (dashboard pesanan sendiri).',
+            '<strong>Kasir modern</strong> — keranjang belanja, diskon, invoice QRIS/Midtrans, dan manajemen pesanan real-time.',
+            '<strong>Poin &amp; loyalitas</strong> — koin member terkumpul di tiap transaksi dan bisa dipakai sebagai diskon.',
+            '<strong>Desain Modern Neo-Bold</strong> — frontend dirombak total: palet krem, aksen neon, hard shadow, tipografi tegas, dan responsif penuh.',
         ],
-        'meta'     => 'Teknologi: <strong>React + Vite + Tailwind (Frontend)</strong> • <strong>Laravel (PHP API Backend)</strong> • SQLite • Integrasi Google OAuth • Laporan',
+        'meta'     => 'Teknologi: <strong>React + Vite + Tailwind CSS 4 (Frontend)</strong> • <strong>Laravel (PHP API Backend)</strong> • MySQL • Google OAuth • Midtrans QRIS • Multi-role',
         'tech'     => [
-            'Frontend: React.js + Vite, Tailwind CSS, Material Tailwind',
+            'Frontend: React.js + Vite, Tailwind CSS 4, Material Tailwind',
             'Backend: Laravel (PHP) — REST API',
-            'Database: SQLite',
-            'Auth: Email/Password + Google OAuth',
+            'Database: MySQL',
+            'Pembayaran: QRIS Midtrans · Auth: Google OAuth + Email/Password',
         ],
         'roles'    => [
-            'Admin — kelola pengguna, produk, dan data master.',
+            'Admin — kelola pengguna, produk, promo, kategori, dan zona pengiriman.',
             'Kasir — transaksi penjualan cepat melalui antarmuka POS.',
-            'Owner — melihat laporan penjualan & rekap usaha.',
+            'Owner — laporan penjualan, analitik stok, dan rekap usaha.',
+            'Supplier — produk dapat ditampilkan sebagai marketplace.',
+            'Customer — akun scan QR meja, pembayaran online, dan dashboard riwayat pesanan.',
         ],
 'previews' => [
-            ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Katalog Produk & Kasir'],
-            ['file' => 'assets/posmart-products-preview.png', 'label' => 'Manajemen Produk'],
+            ['file' => 'assets/posmart-catalog-preview.png', 'label' => 'Storefront & Kasir (desain Neo-Bold)'],
+            ['file' => 'assets/posmart-products-preview.png', 'label' => 'Manajemen Produk (Panel Admin)'],
             ['file' => 'assets/posmart-login-preview.png', 'label' => 'Halaman Login'],
         ],
     ],
@@ -145,6 +186,7 @@ $projects = [
         'tag'      => 'Karya Pribadi • Reynaldi Delphiano',
         'badge'    => 'Personal Web',
         'image'    => 'assets/portfolio-preview.svg',
+        'logo'     => 'assets/reydel-logo.svg',
         'initial'  => 'RD Portfolio',
         'github'   => 'https://github.com/ReyDel6/ReyPortofolio',
         'live'     => 'http://reydel.page.gd/',
@@ -170,6 +212,7 @@ $projects = [
         'tag'      => 'Karya Pribadi • Mobile Development',
         'badge'    => 'Flutter Mobile App',
         'image'    => 'assets/umkm-connect-mobile.svg',
+        'logo'     => 'assets/umkm-connect-logo.png',
         'initial'  => 'UMKM Connect Mobile',
         'desc'     => 'Versi mobile <strong>UMKM Connect</strong> berbasis Flutter untuk membantu UMKM mengelola operasional, katalog, stok, transaksi, laporan, serta koneksi dengan customer dan supplier melalui smartphone.',
         'points'   => [
@@ -328,6 +371,39 @@ $projects = [
         ],
         'previews' => [
             ['file' => 'assets/gudang-login.webp', 'label' => 'Halaman Login'],
+        ],
+    ],
+    [
+        'title'    => 'Undangan Pernikahan Digital',
+        'tag'      => 'Karya Pribadi • Web Development',
+        'badge'    => 'Undangan Digital',
+        'image'    => 'assets/undangan-preview.svg',
+        'logo'     => 'assets/undangan-logo.svg',
+        'initial'  => 'Undangan',
+        'github'   => 'https://github.com/ReyDel6/wedding-invitation',
+        'live'     => 'https://undangan-nikah-ruby.vercel.app',
+        'desc'     => 'Aplikasi <strong>undangan pernikahan digital</strong> interaktif satu halaman berbasis <strong>React + Vite + Tailwind CSS 4</strong> — layar pembuka dengan foto pasangan, musik latar, countdown, rangkaian acara, galeri, RSVP WhatsApp, amplop digital, dan ucapan & doa tamu, dengan seluruh data dikelola lewat satu file config.',
+        'points'   => [
+            '<strong>Layar pembuka</strong> — foto pasangan berbingkai emas, tombol "Buka Undangan", dan sapaan tamu personal via <code>?to=Nama</code>.',
+            '<strong>Musik latar</strong> — auto-play dengan tombol mute melayang di pojok layar.',
+            '<strong>Countdown real-time</strong> — hitung mundur menuju hari pernikahan.',
+            '<strong>Rangkaian acara</strong> — jadwal Akad & Resepsi lengkap dengan venue dan tautan Google Maps.',
+            '<strong>RSVP ke WhatsApp</strong> — konfirmasi kehadiran otomatis tanpa backend.',
+            '<strong>Amplop digital</strong> — nomor rekening, tombol salin, dan gambar QRIS.',
+            '<strong>Ucapan & doa</strong> — tamu menulis doa yang tersimpan di localStorage per perangkat.',
+            '<strong>Desain elegan</strong> — palet cream & emas, tipografi Playfair Display, dan animasi kelopak bunga.',
+        ],
+        'meta'     => 'Teknologi: <strong>React 19 + Vite + Tailwind CSS 4</strong> • lucide-react • Google Fonts • Deploy statis',
+        'tech'     => [
+            'Frontend: React 19 + Vite',
+            'Styling: Tailwind CSS 4 (@theme custom palette)',
+            'Icons: lucide-react',
+            'Fonts: Playfair Display & Inter (Google Fonts)',
+            'Deploy: static build (dist/) — Vercel/Netlify/GitHub Pages ready',
+        ],
+        'previews' => [
+            ['file' => 'assets/undangan-cover-preview.png', 'label' => 'Layar Pembuka (Cover)'],
+            ['file' => 'assets/undangan-invitation-preview.png', 'label' => 'Halaman Undangan (Mobile)'],
         ],
     ],
 ];
@@ -572,7 +648,7 @@ $trainings = [
             'Menerapkan clean code, efisiensi performa, dan modern development tools.',
         ],
         'results'    => [
-            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Katalog & Kasir'],
+            ['image' => 'assets/posmart-catalog-preview.png', 'label' => 'POSMart — Storefront Neo-Bold'],
             ['image' => 'assets/posmart-products-preview.png', 'label' => 'POSMart — Manajemen Produk'],
             ['image' => 'assets/posmart-login-preview.png', 'label' => 'POSMart — Halaman Login'],
         ],
@@ -613,6 +689,9 @@ $trainings = [
             'Instalasi sistem operasi, driver management, konfigurasi jaringan lokal, dan optimasi performa sistem.',
             'Melakukan analisis kerusakan (troubleshooting) perangkat keras/lunak dan perbaikan sesuai standar teknis.',
         ],
+        'results'    => [
+            ['image' => 'assets/experience/activity-teknisi-komputer.jpeg', 'label' => 'Kegiatan Pelatihan Teknisi Komputer'],
+        ],
     ],
     [
         'title'       => 'Computer Operator',
@@ -628,6 +707,10 @@ $trainings = [
             'Program pelatihan vokasi & kompetensi bidang Operator Komputer.',
             'Pengoperasian Office Suite tingkat lanjut untuk kebutuhan administrasi, analisa lembar kerja data, dan laporan profesional.',
             'Manajemen sistem komputer, pengelolaan file digital terstruktur, dan pemeliharaan sistem pendukung produktivitas.',
+        ],
+        'results'    => [
+            ['image' => 'assets/experience/activity-operator-komputer.jpeg', 'label' => 'Kegiatan Operator Komputer'],
+            ['image' => 'assets/experience/activity-operator-komputer-2.jpeg', 'label' => 'Kegiatan Operator Komputer (2)'],
         ],
     ],
 ];
