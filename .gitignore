@@ -1,0 +1,7 @@
+# Log server dev lokal
+*.log
+_srv.log
+
+# OS
+.DS_Store
+Thumbs.db

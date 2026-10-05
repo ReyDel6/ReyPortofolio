@@ -19,7 +19,7 @@ require __DIR__ . '/inc/header.php';
                     <?php endforeach; ?>
                     <div class="signature-block">
                         <span class="signature-label"><?php echo t('signature_label'); ?></span>
-                        <img src="assets/ttd-rey-cropped.png" alt="<?php echo htmlspecialchars(t('signature_alt')); ?>" class="signature-image" loading="lazy">
+                        <img src="assets/ttd-rey-cropped.webp" alt="<?php echo htmlspecialchars(t('signature_alt')); ?>" class="signature-image" loading="lazy">
                     </div>
                 </div>
                 <div class="about-card">

@@ -75,7 +75,7 @@ $nextProj = $projects[$nextIdx];
                 <div class="proj-modal-section">
                     <h4 class="proj-sub"><?php echo t('proj_gallery'); ?></h4>
                     <div class="proj-modal-gallery">
-                        <?php foreach ($projPreviews as $pv):
+                        <?php $pvIdx = 0; foreach ($projPreviews as $pv):
                             $pvFile = $pv['file'] ?? '';
                             $pvLabel = $pv['label'] ?? t('preview_label_dflt');
                             if (empty($pvFile)) { continue; }
@@ -83,7 +83,7 @@ $nextProj = $projects[$nextIdx];
                         <div class="proj-media-card">
                             <div class="proj-media-label"><?php echo htmlspecialchars($pvLabel); ?></div>
                             <a href="<?php echo htmlspecialchars($pvFile); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('preview_title')); ?>">
-                                <img src="<?php echo htmlspecialchars($pvFile); ?>" alt="<?php echo htmlspecialchars(t('preview_alt', ['title' => $proj['title']])); ?>" loading="lazy">
+                                <img src="<?php echo htmlspecialchars($pvFile); ?>" alt="<?php echo htmlspecialchars(t('preview_alt', ['title' => $proj['title']])); ?>" loading="<?php echo ($pvIdx++ === 0) ? 'eager' : 'lazy'; ?>"<?php if ($pvIdx === 1) { echo ' fetchpriority="high"'; } ?>>
                                 <span class="zoom-hint"><?php echo t('zoom'); ?></span>
                             </a>
                         </div>
