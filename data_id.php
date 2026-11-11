@@ -162,7 +162,7 @@ $projects = [
         'image'    => 'assets/nexbrew-logo.svg',
         'initial'  => 'NexBrew',
         'github'   => 'https://github.com/ReyDel6/nexbrew-pos-ecosystem',
-        'live'     => 'http://localhost:3000',
+        'live'     => '',
         'desc'     => 'Ekosistem kasir (POS), kitchen display (KDS), pemesanan mandiri meja (QR Self-Order), dan ERP akuntansi back-office terintegrasi secara real-time untuk coffeeshop specialty modern &amp; artisan roastery. Dibangun dengan arsitektur <strong>Next.js 15 App Router Monorepo (pnpm)</strong>, <strong>Tailwind CSS</strong>, sinkronisasi reaktif multi-stasiun, perhitungan <strong>HPP Moving Average BOM</strong> bahan baku otomatis, serta pembukuan <strong>Jurnal Umum Double-Entry</strong> seimbang.',
         'points'   => [
             '<strong>Website Publik &amp; Roastery Showcase</strong> — Landing page B2C modern dengan showcase biji kopi in-house, profil sangrai, modal reservasi meja interaktif dengan auto-WhatsApp ticket (#RSV-xxxx), serta roda karakter sensori organoleptik menu.',
