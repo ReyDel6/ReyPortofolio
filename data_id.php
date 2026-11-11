@@ -182,6 +182,7 @@ $projects = [
             'Icons & Fonts: Google Material Symbols + Poppins & Inter',
         ],
         'previews' => [
+            ['file' => 'assets/nexbrew-landing-hero.png', 'label' => 'Website Publik & Roastery Showcase (Landing Page)'],
             ['file' => 'assets/nexbrew-pos-terminal.png', 'label' => 'Terminal Kasir POS (Split Bill, PB1 10% & Blind Close)'],
             ['file' => 'assets/nexbrew-kds-barista.png', 'label' => 'Kitchen Display System KDS (Timer SLA & Station Filter)'],
             ['file' => 'assets/nexbrew-customer-qr.png', 'label' => 'Self-Order QR Meja Pelanggan (Kustomisasi Varian)'],
@@ -191,6 +192,7 @@ $projects = [
             ['file' => 'assets/nexbrew-table-management.png', 'label' => 'Denah Meja & Generator Stiker QR Akrilik'],
             ['file' => 'assets/nexbrew-recipes-bom.png', 'label' => 'Manajemen Resep BOM & HPP Moving Average'],
             ['file' => 'assets/nexbrew-accounting-journal.png', 'label' => 'Buku Jurnal Umum & Laporan Keuangan Double-Entry'],
+            ['file' => 'assets/nexbrew-portal-security.png', 'label' => 'Staff Operational Security Gate (PIN & Shift Kasir)'],
         ],
     ],
 

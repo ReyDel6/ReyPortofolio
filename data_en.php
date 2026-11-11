@@ -184,6 +184,7 @@ $projects = [
             'Icons & Fonts: Google Material Symbols + Poppins & Inter',
         ],
         'previews' => [
+            ['file' => 'assets/nexbrew-landing-hero.png', 'label' => 'Public Storefront & Roastery Showcase (Landing Page)'],
             ['file' => 'assets/nexbrew-pos-terminal.png', 'label' => 'POS Cashier Terminal (Split Bill, PB1 10% & Blind Close)'],
             ['file' => 'assets/nexbrew-kds-barista.png', 'label' => 'Kitchen Display System KDS (SLA Timer & Station Filter)'],
             ['file' => 'assets/nexbrew-customer-qr.png', 'label' => 'Customer Table QR Self-Order (Modifier Customization)'],
@@ -193,6 +194,7 @@ $projects = [
             ['file' => 'assets/nexbrew-table-management.png', 'label' => 'Floor Plan Table Layout & Acrylic QR Printout'],
             ['file' => 'assets/nexbrew-recipes-bom.png', 'label' => 'BOM Recipe Management & Moving Average COGS'],
             ['file' => 'assets/nexbrew-accounting-journal.png', 'label' => 'Double-Entry General Ledger & Financial Income Statement'],
+            ['file' => 'assets/nexbrew-portal-security.png', 'label' => 'Staff Operational Security Gate (PIN Keypad & Shift)'],
         ],
     ],
 
