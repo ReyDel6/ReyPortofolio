@@ -162,8 +162,8 @@ $projects = [
         'image'    => 'assets/nexbrew-logo.svg',
         'initial'  => 'NexBrew',
         'github'   => 'https://github.com/ReyDel6/nexbrew-pos-ecosystem',
-        'live'     => '',
-        'desc'     => 'Ekosistem kasir (POS), kitchen display (KDS), pemesanan mandiri meja (QR Self-Order), dan ERP akuntansi back-office terintegrasi secara real-time untuk coffeeshop specialty modern &amp; artisan roastery. Dibangun dengan arsitektur <strong>Next.js 15 App Router Monorepo (pnpm)</strong>, <strong>Tailwind CSS</strong>, sinkronisasi reaktif multi-stasiun, perhitungan <strong>HPP Moving Average BOM</strong> bahan baku otomatis, serta pembukuan <strong>Jurnal Umum Double-Entry</strong> seimbang.',
+        'live'     => 'https://nexbrew.vercel.app',
+        'desc'     => 'Ekosistem kasir (POS), kitchen display (KDS), pemesanan mandiri meja (QR Self-Order), dan ERP akuntansi back-office terintegrasi secara real-time untuk coffeeshop specialty modern &amp; artisan roastery. Dibangun dengan arsitektur <strong>Next.js 15 App Router Monorepo (pnpm)</strong>, <strong>Tailwind CSS</strong>, sinkronisasi reaktif multi-stasiun, perhitungan <strong>HPP Moving Average BOM</strong> bahan baku otomatis, serta pembukuan <strong>Jurnal Umum Double-Entry</strong> seimbang. Aplikasi telah dideploy secara live dan dapat diuji langsung di <a href="https://nexbrew.vercel.app" target="_blank" rel="noopener">nexbrew.vercel.app</a>.',
         'points'   => [
             '<strong>Website Publik &amp; Roastery Showcase</strong> — Landing page B2C modern dengan showcase biji kopi in-house, profil sangrai, modal reservasi meja interaktif dengan auto-WhatsApp ticket (#RSV-xxxx), serta roda karakter sensori organoleptik menu.',
             '<strong>Staff Operational Security Gate</strong> — Akses portal karyawan terlindungi PIN numerik tablet-first (1234 Staf / 8888 SPV / Password Admin) dengan manajemen sesi aktif dan tombol kunci portal instan.',

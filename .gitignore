@@ -2,6 +2,12 @@
 *.log
 _srv.log
 
+# Deploy & config
+.deploy*
+*.zip
+.env*
+__pycache__/
+
 # OS
 .DS_Store
 Thumbs.db

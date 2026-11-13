@@ -19,9 +19,10 @@ $canonUrl = $absBase . '/' . $selfFile;
 $ogImage  = $absBase . '/assets/portfolio-home-preview.png';
 $ogLocale = ($GLOBALS['LANG'] ?? 'id') === 'en' ? 'en_US' : 'id_ID';
 
-function navLink($href, $label, $key) {
+function navLink($href, $label, $key, $extraClass = '') {
     $act = ($GLOBALS['activePage'] ?? 'index') === $key ? ' active' : '';
-    return '<a href="' . htmlspecialchars($href) . '" class="nav-item' . $act . '">' . htmlspecialchars($label) . '</a>';
+    $cls = 'nav-item' . $act . ($extraClass !== '' ? ' ' . $extraClass : '');
+    return '<a href="' . htmlspecialchars($href) . '" class="' . $cls . '">' . htmlspecialchars($label) . '</a>';
 }
 
 function getSocialIcon($label, $size = 20) {
@@ -86,7 +87,8 @@ function getSocialIcon($label, $size = 20) {
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="stylesheet" href="css/style.css?v=<?php echo filemtime(__DIR__ . '/../css/style.css'); ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <?php if (!empty($googleAnalyticsId)): ?>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo rawurlencode($googleAnalyticsId); ?>"></script>
     <script>
@@ -116,9 +118,10 @@ function getSocialIcon($label, $size = 20) {
             <nav class="nav-links" id="navLinks">
                 <?php echo navLink('index.php', t('nav_home'), 'index'); ?>
                 <?php echo navLink('about.php', t('nav_about'), 'about'); ?>
+                <?php echo navLink('kegiatan.php', t('nav_activities'), 'activities'); ?>
                 <?php echo navLink('projects.php', t('nav_projects'), 'projects'); ?>
                 <?php echo navLink('certificates.php', t('nav_certificates'), 'certificates'); ?>
-                <?php echo navLink('contact.php', t('nav_contact'), 'contact'); ?>
+                <?php echo navLink('contact.php', t('nav_contact'), 'contact', 'nav-item-mobile-only'); ?>
             </nav>
 
             <div class="nav-actions">
@@ -132,7 +135,7 @@ function getSocialIcon($label, $size = 20) {
                     <span><?php echo t('cmd_btn_label'); ?></span>
                     <kbd>⌘K</kbd>
                 </button>
-                <a href="contact.php" class="btn-nav-cta"><?php echo t('cta_contact'); ?></a>
+                <a href="contact.php" class="btn-nav-cta<?php echo ($GLOBALS['activePage'] ?? 'index') === 'contact' ? ' active' : ''; ?>"><?php echo t('cta_contact'); ?></a>
                 <button class="nav-toggle" id="navToggle" aria-label="<?php echo htmlspecialchars(t('nav_toggle_aria')); ?>">
                     <span></span><span></span><span></span>
                 </button>

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/data.php';
 require_once __DIR__ . '/inc/tech-icons.php';
+require_once __DIR__ . '/inc/project-order.php';
 $pid = (int) ($_GET['p'] ?? -1);
 if (!isset($projects[$pid])) {
     header('Location: projects.php');
@@ -12,10 +13,14 @@ $pageTitle  = $proj['title'] . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
 
 $projPreviews = $proj['previews'] ?? (!empty($proj['preview']) ? [['file' => $proj['preview'], 'label' => $proj['preview_label'] ?? t('preview_label_dflt')]] : []);
+$isAgrinexMobile = strpos($proj['image'] ?? '', 'agrinex-mobile-') !== false;
 $hasProjectMedia = !empty($proj['hki_image']) || !empty($proj['uiux']) || !empty($proj['certificate']) || !empty($proj['preview']) || !empty($proj['previews']);
 $total = count($projects);
-$prevIdx = ($pid + $total - 1) % $total;
-$nextIdx = ($pid + 1) % $total;
+$displayOrder = projectDisplayOrder($projects);
+$pos = array_search($pid, $displayOrder, true);
+$pos = $pos === false ? 0 : $pos;
+$prevIdx = $displayOrder[($pos - 1 + $total) % $total];
+$nextIdx = $displayOrder[($pos + 1) % $total];
 $prevProj = $projects[$prevIdx];
 $nextProj = $projects[$nextIdx];
 ?>
@@ -36,7 +41,27 @@ $nextProj = $projects[$nextIdx];
                             <span class="proj-badge-hki"><?php echo htmlspecialchars($proj['badge'] ?? t('badge_fallback')); ?></span>
                         </div>
                         <h3><?php echo htmlspecialchars($proj['title']); ?></h3>
+                        <?php if (!empty($proj['year']) || !empty($proj['role'])): ?>
+                        <div class="proj-detail-meta">
+                            <?php if (!empty($proj['year'])): ?>
+                            <span class="proj-meta-item">📅 <?php echo htmlspecialchars($proj['year']); ?></span>
+                            <?php endif; ?>
+                            <?php if (!empty($proj['role'])): ?>
+                            <span class="proj-meta-item">👤 <?php echo htmlspecialchars($proj['role']); ?></span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
                         <p class="proj-intro"><?php echo $proj['desc']; ?></p>
+                        <?php if (!empty($proj['live']) || !empty($proj['github'])): ?>
+                        <div class="proj-links" style="margin-top: 14px;">
+                            <?php if (!empty($proj['live'])): ?>
+                            <a href="<?php echo htmlspecialchars($proj['live']); ?>" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Live Demo ↗</a>
+                            <?php endif; ?>
+                            <?php if (!empty($proj['github'])): ?>
+                            <a href="<?php echo htmlspecialchars($proj['github']); ?>" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">GitHub ↗</a>
+                            <?php endif; ?>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -74,7 +99,7 @@ $nextProj = $projects[$nextIdx];
                 <?php if ($hasProjectMedia): ?>
                 <div class="proj-modal-section">
                     <h4 class="proj-sub"><?php echo t('proj_gallery'); ?></h4>
-                    <div class="proj-modal-gallery">
+                    <div class="proj-modal-gallery<?php echo $isAgrinexMobile ? ' proj-modal-gallery-mobile-app' : ''; ?>">
                         <?php $pvIdx = 0; foreach ($projPreviews as $pv):
                             $pvFile = $pv['file'] ?? '';
                             $pvLabel = $pv['label'] ?? t('preview_label_dflt');
@@ -82,8 +107,24 @@ $nextProj = $projects[$nextIdx];
                         ?>
                         <div class="proj-media-card">
                             <div class="proj-media-label"><?php echo htmlspecialchars($pvLabel); ?></div>
-                            <a href="<?php echo htmlspecialchars($pvFile); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('preview_title')); ?>">
-                                <img src="<?php echo htmlspecialchars($pvFile); ?>" alt="<?php echo htmlspecialchars(t('preview_alt', ['title' => $proj['title']])); ?>" loading="<?php echo ($pvIdx++ === 0) ? 'eager' : 'lazy'; ?>"<?php if ($pvIdx === 1) { echo ' fetchpriority="high"'; } ?>>
+                            <?php
+                                $previewClass = '';
+                                if (strpos($pvFile, 'agrinex-web-') !== false) {
+                                    $previewClass = ' proj-fig-link-agrinex-web';
+                                    if (in_array(basename($pvFile), ['agrinex-web-diagnostic.png', 'agrinex-web-consultation.png', 'agrinex-web-notifications.png'])) {
+                                        $previewClass .= ' proj-fig-link-modal-dialog';
+                                    }
+                                } elseif (strpos($pvFile, 'agrinex-iot-') !== false) {
+                                    $previewClass = ' proj-fig-link-agrinex-hardware';
+                                } elseif (strpos($pvFile, 'agrinex-desktop-') !== false || strpos($pvFile, 'agrinex-mobile-') !== false) {
+                                    $previewClass = ' proj-fig-link-agrinex-app';
+                                    if (strpos($pvFile, 'agrinex-mobile-flutter-') !== false) {
+                                        $previewClass .= ' proj-fig-link-agrinex-mobile';
+                                    }
+                                }
+                            ?>
+                            <a href="<?php echo htmlspecialchars($pvFile); ?>" target="_blank" rel="noopener" class="proj-fig-link<?php echo $previewClass; ?>" title="<?php echo htmlspecialchars(t('preview_title')); ?>" data-lightbox="project-<?php echo (int) $pid; ?>" data-caption="<?php echo htmlspecialchars($pvLabel); ?>">
+                                <img src="<?php echo htmlspecialchars($pvFile); ?><?php echo file_exists(__DIR__ . '/' . $pvFile) ? '?v=' . filemtime(__DIR__ . '/' . $pvFile) : ''; ?>" alt="<?php echo htmlspecialchars(t('preview_alt', ['title' => $proj['title']])); ?>" loading="<?php echo ($pvIdx++ === 0) ? 'eager' : 'lazy'; ?>"<?php if ($pvIdx === 1) { echo ' fetchpriority="high"'; } ?>>
                                 <span class="zoom-hint"><?php echo t('zoom'); ?></span>
                             </a>
                         </div>
@@ -91,7 +132,7 @@ $nextProj = $projects[$nextIdx];
                         <?php if (!empty($proj['hki_image'])): ?>
                         <div class="proj-media-card">
                             <div class="proj-media-label"><?php echo t('hki_label'); ?></div>
-                            <a href="<?php echo htmlspecialchars($proj['hki_image']); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('hki_view_title')); ?>">
+                            <a href="<?php echo htmlspecialchars($proj['hki_image']); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('hki_view_title')); ?>" data-lightbox="project-<?php echo (int) $pid; ?>" data-caption="<?php echo htmlspecialchars(t('hki_label')); ?>">
                                 <img src="<?php echo htmlspecialchars($proj['hki_image']); ?>" alt="<?php echo htmlspecialchars(t('hki_alt')); ?>" loading="lazy">
                                 <span class="zoom-hint"><?php echo t('zoom'); ?></span>
                             </a>
@@ -100,7 +141,7 @@ $nextProj = $projects[$nextIdx];
                         <?php if (!empty($proj['uiux'])): ?>
                         <div class="proj-media-card">
                             <div class="proj-media-label"><?php echo htmlspecialchars($proj['uiux_label'] ?? t('uiux_label_dflt')); ?></div>
-                            <a href="<?php echo htmlspecialchars($proj['uiux']); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('uiux_view_title')); ?>">
+                            <a href="<?php echo htmlspecialchars($proj['uiux']); ?>" target="_blank" rel="noopener" class="proj-fig-link" title="<?php echo htmlspecialchars(t('uiux_view_title')); ?>" data-lightbox="project-<?php echo (int) $pid; ?>" data-caption="<?php echo htmlspecialchars($proj['uiux_label'] ?? t('uiux_label_dflt')); ?>">
                                 <img src="<?php echo htmlspecialchars($proj['uiux']); ?>" alt="<?php echo htmlspecialchars(t('uiux_alt')); ?>" loading="lazy">
                                 <span class="zoom-hint"><?php echo t('zoom'); ?></span>
                             </a>

@@ -164,8 +164,8 @@ $projects = [
         'image'    => 'assets/nexbrew-logo.svg',
         'initial'  => 'NexBrew',
         'github'   => 'https://github.com/ReyDel6/nexbrew-pos-ecosystem',
-        'live'     => '',
-        'desc'     => 'An end-to-end POS, Kitchen Display System (KDS), Table QR Self-Ordering, and Back-Office Accounting ERP ecosystem engineered for modern specialty coffee shops and artisanal roasteries. Built with a high-performance <strong>Next.js 15 App Router Monorepo (pnpm)</strong>, <strong>Tailwind CSS</strong>, real-time multi-station reactive sync, automatic <strong>BOM Moving Average COGS</strong> calculations, and balanced <strong>Double-Entry General Ledger</strong> accounting.',
+        'live'     => 'https://nexbrew.vercel.app',
+        'desc'     => 'An end-to-end POS, Kitchen Display System (KDS), Table QR Self-Ordering, and Back-Office Accounting ERP ecosystem engineered for modern specialty coffee shops and artisanal roasteries. Built with a high-performance <strong>Next.js 15 App Router Monorepo (pnpm)</strong>, <strong>Tailwind CSS</strong>, real-time multi-station reactive sync, automatic <strong>BOM Moving Average COGS</strong> calculations, and balanced <strong>Double-Entry General Ledger</strong> accounting. Deployed and live for testing at <a href="https://nexbrew.vercel.app" target="_blank" rel="noopener">nexbrew.vercel.app</a>.',
         'points'   => [
             '<strong>Public Storefront &amp; Roastery Showcase</strong> — Modern B2C landing page featuring in-house roastery beans, interactive online table booking modal with WhatsApp integration (#RSV-xxxx), and sensory flavor profile wheels.',
             '<strong>Staff Security Passcode Gate</strong> — Employee portal secured with a touch-friendly PIN keypad (Staff 1234 / Supervisor 8888 / Admin Passcode) with persistent session tracking and instant lock capability.',

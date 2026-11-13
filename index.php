@@ -1,17 +1,26 @@
 <?php
 require_once __DIR__ . '/data.php';
+require_once __DIR__ . '/inc/tech-icons.php';
 $activePage = 'index';
 $pageTitle  = $profile['name'] . ' — Web & Mobile Developer';
 require __DIR__ . '/inc/header.php';
 ?>
     <!-- HERO -->
     <section class="hero" id="hero">
+        <canvas id="heroFlowCanvas" class="hero-flow-canvas" aria-hidden="true"></canvas>
+        <div class="hero-flow-overlay" aria-hidden="true"></div>
         <div class="container hero-inner">
             <div class="hero-left">
                 <p class="hero-eyebrow"><?php echo htmlspecialchars($p['eyebrow']); ?></p>
                 <h1 class="hero-title-with-badge">
-                    <span><?php echo htmlspecialchars($p['name']); ?></span>
-                    <svg class="verified-badge-large" viewBox="0 0 24 24" width="28" height="28" fill="#38bdf8" title="Verified Developer"><path d="m23 12-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg>
+                    <span><?php
+                        $nameParts = explode(' ', $p['name'], 2);
+                        if (count($nameParts) === 2) {
+                            echo htmlspecialchars($nameParts[0]) . ' <span class="hero-name-badge-wrap">' . htmlspecialchars($nameParts[1]) . '<svg class="verified-badge-large" viewBox="0 0 24 24" width="28" height="28" fill="#38bdf8" title="Verified Developer"><path d="m23 12-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg></span>';
+                        } else {
+                            echo htmlspecialchars($p['name']) . '<svg class="verified-badge-large" viewBox="0 0 24 24" width="28" height="28" fill="#38bdf8" title="Verified Developer"><path d="m23 12-2.44-2.79.34-3.69-3.61-.82-1.89-3.2L12 2.96 8.6 1.5 6.71 4.69 3.1 5.5l.34 3.7L1 12l2.44 2.79-.34 3.7 3.61.82L8.6 22.5l3.4-1.47 3.4 1.46 1.89-3.19 3.61-.82-.34-3.69L23 12zm-12.91 4.72-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"/></svg>';
+                        }
+                    ?></span>
                 </h1>
                 <p class="hero-role"><?php echo htmlspecialchars($p['role']); ?><span class="dot-sep">•</span><?php echo htmlspecialchars($p['role2']); ?></p>
                 <p class="hero-desc">
@@ -19,15 +28,32 @@ require __DIR__ . '/inc/header.php';
                 </p>
                 <div class="hero-actions">
                     <a href="projects.php" class="btn btn-primary"><?php echo t('btn_projects'); ?></a>
-                    <a href="contact.php" class="btn btn-ghost"><?php echo t('btn_contact'); ?></a>
+                    <a href="Profile.pdf" target="_blank" rel="noopener" class="btn btn-ghost">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        <?php echo t('btn_resume'); ?>
+                    </a>
                 </div>
                 <!-- TECH MARQUEE -->
                 <div class="tech-marquee" aria-hidden="true">
                     <div class="tech-marquee-track">
                         <?php $m1 = ['React', 'Laravel', 'PHP', 'Flutter', 'Next.js', 'MySQL', 'Tailwind CSS', 'TypeScript', 'PostgreSQL', 'Docker', 'Git', 'Figma', 'Express', 'Node.js', 'Prisma', 'Nginx']; ?>
                         <?php $m2 = $m1; for ($i = 0; $i < 2; $i++): foreach (($i % 2 === 0 ? $m1 : $m2) as $tech): ?>
-                        <span><?php echo htmlspecialchars($tech); ?></span>
+                        <?php $techMatches = techMatches($tech); $techPill = $techMatches[0] ?? null; ?>
+                        <span class="home-tech-item">
+                            <?php if ($techPill): ?>
+                            <img src="<?php echo htmlspecialchars($techPill['local_icon'] ?? 'https://skillicons.dev/icons?i=' . $techPill['icon']); ?>" alt="" loading="lazy" onerror="this.style.display='none';">
+                            <?php endif; ?>
+                            <?php echo htmlspecialchars($tech); ?>
+                        </span>
                         <?php endforeach; endfor; ?>
+                    </div>
+                </div>
+                <div class="home-trust-strip">
+                    <span class="home-trust-label"><?php echo htmlspecialchars(t('trust_tag')); ?></span>
+                    <div class="home-trust-logos" aria-label="<?php echo htmlspecialchars(t('trust_heading')); ?>">
+                        <span class="home-trust-logo">BCA</span>
+                        <span class="home-trust-logo">Nescafé</span>
+                        <span class="home-trust-logo">WOM Finance</span>
                     </div>
                 </div>
                 <!-- STATS HIGHLIGHTS -->
@@ -63,6 +89,34 @@ require __DIR__ . '/inc/header.php';
                             <span>Pixel</span>
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PROJECT -->
+    <section class="section featured-project" id="featured-project">
+        <div class="container">
+            <div class="section-head">
+                <span class="tag"><?php echo t('featured_tag'); ?></span>
+                <h2><?php echo t('featured_heading'); ?></h2>
+                <p class="section-subdesc"><?php echo t('featured_desc'); ?></p>
+            </div>
+            <div class="featured-project-card">
+                <div class="featured-project-copy">
+                    <span class="featured-project-kicker">UMKM CONNECT</span>
+                    <h3><?php echo t('featured_copy_heading'); ?></h3>
+                    <p><?php echo t('featured_copy_desc'); ?></p>
+                    <div class="featured-project-points">
+                        <span>✓ <?php echo t('featured_point_pos'); ?></span>
+                        <span>✓ <?php echo t('featured_point_qr'); ?></span>
+                        <span>✓ <?php echo t('featured_point_b2b'); ?></span>
+                    </div>
+                    <a class="btn btn-primary" href="project-detail.php?p=2"><?php echo t('featured_cta'); ?> →</a>
+                </div>
+                <div class="featured-project-visual">
+                    <img class="featured-project-web" src="assets/ui-ux-umkm.jpeg" alt="<?php echo htmlspecialchars(t('featured_web_alt')); ?>" loading="lazy">
+                    <img class="featured-project-mobile" src="assets/umkm-connect-mobile.svg" alt="<?php echo htmlspecialchars(t('featured_mobile_alt')); ?>" loading="lazy">
                 </div>
             </div>
         </div>

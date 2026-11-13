@@ -5,6 +5,15 @@ $activePage = 'about';
 $pageTitle  = t('about_title_all') . ' — ' . $profile['name'];
 require __DIR__ . '/inc/header.php';
 ?>
+    <!-- QUICK JUMP -->
+    <div class="quick-jump" id="quickJump">
+        <div class="container quick-jump-inner">
+            <a class="quick-jump-chip active" href="#tentang"><?php echo htmlspecialchars(t('jump_summary')); ?></a>
+            <a class="quick-jump-chip" href="#pengalaman"><?php echo htmlspecialchars(t('jump_career')); ?></a>
+            <a class="quick-jump-chip" href="#pendidikan"><?php echo htmlspecialchars(t('jump_education')); ?></a>
+        </div>
+    </div>
+
     <!-- TENTANG -->
     <section class="section page-first" id="tentang">
         <div class="container">
@@ -14,19 +23,45 @@ require __DIR__ . '/inc/header.php';
             </div>
             <div class="about-grid">
                 <div class="about-card">
+                    <?php
+                    // Tautan studi kasus UMKM Connect — indeks dicari dinamis agar tidak rusak saat urutan proyek berubah.
+                    $umkmIndex = array_search('UMKM Connect', array_column($projects, 'title'), true);
+                    $umkmHref  = $umkmIndex !== false ? 'project-detail.php?p=' . (int) $umkmIndex : 'projects.php';
+                    ?>
                     <?php foreach ($p['summary'] as $para): ?>
+                        <?php
+                        $para = str_replace(
+                            '<strong>UMKM Connect</strong>',
+                            '<a class="inline-link" href="' . htmlspecialchars($umkmHref) . '"><strong>UMKM Connect</strong></a>',
+                            $para
+                        );
+                        ?>
                         <p><?php echo $para; ?></p>
                     <?php endforeach; ?>
+                    <?php if (!empty($p['traits'])): ?>
+                    <div class="about-traits">
+                        <?php foreach ($p['traits'] as $trait): ?>
+                            <span class="about-trait"><?php echo htmlspecialchars($trait); ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif; ?>
                     <div class="signature-block">
                         <span class="signature-label"><?php echo t('signature_label'); ?></span>
                         <img src="assets/ttd-rey-cropped.webp" alt="<?php echo htmlspecialchars(t('signature_alt')); ?>" class="signature-image" loading="lazy">
                     </div>
                 </div>
-                <div class="about-card">
+                <div class="about-card about-meta-card">
+                    <img src="<?php echo htmlspecialchars($p['photo']); ?>" alt="<?php echo htmlspecialchars(t('alt_photo', ['name' => $p['name']])); ?>" class="about-photo" loading="lazy">
                     <p><strong><?php echo t('about_base'); ?></strong> <?php echo htmlspecialchars($p['location']); ?></p>
                     <p><strong><?php echo t('about_lang'); ?></strong> <?php echo htmlspecialchars($p['languages']); ?></p>
                     <p><strong><?php echo t('about_focus'); ?></strong> <?php echo htmlspecialchars($p['focus']); ?></p>
-                    <a href="contact.php" class="btn btn-primary btn-sm"><?php echo t('btn_contact_me'); ?></a>
+                    <div class="about-actions">
+                        <a href="contact.php" class="btn btn-primary btn-sm"><?php echo t('btn_contact_me'); ?></a>
+                        <a href="Profile.pdf" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            <?php echo t('btn_resume'); ?> (PDF)
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -170,78 +205,17 @@ require __DIR__ . '/inc/header.php';
     </section>
     <?php endif; ?>
 
-    <!-- PELATIHAN -->
-    <?php if (!empty($trainings)): ?>
-    <section class="section section-alt" id="pelatihan">
+    <!-- KEGIATAN & PELATIHAN (TEASER) -->
+    <section class="section section-alt" id="kegiatan-teaser">
         <div class="container">
-            <div class="section-head">
-                <span class="tag"><?php echo t('training_tag'); ?></span>
-                <h2><?php echo t('training_heading'); ?></h2>
-                <p class="section-subdesc"><?php echo htmlspecialchars(t('training_subdesc')); ?></p>
-            </div>
-            <div class="training-grid">
-                <?php foreach ($trainings as $training): ?>
-                <article class="training-card">
-                    <div class="training-card-head">
-                        <div class="training-icon">
-                            <?php if (!empty($training['logo'])): ?>
-                            <img src="<?php echo htmlspecialchars($training['logo']); ?>" alt="<?php echo htmlspecialchars(t('alt_logo', ['org' => $training['org']])); ?>" class="training-logo" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='inline-block';">
-                            <span class="training-icon-fallback" style="display:none;"><?php echo htmlspecialchars($training['icon'] ?? '📚'); ?></span>
-                            <?php else: ?>
-                            <?php echo htmlspecialchars($training['icon'] ?? '📚'); ?>
-                            <?php endif; ?>
-                        </div>
-                        <div>
-                            <h4><?php echo htmlspecialchars($training['title']); ?></h4>
-                            <?php if (!empty($training['category'])): ?>
-                            <span class="training-track"><?php echo htmlspecialchars($training['category']); ?></span>
-                            <?php endif; ?>
-                            <p class="training-org"><?php echo htmlspecialchars($training['org']); ?></p>
-                        </div>
-                    </div>
-                    <div class="training-meta">
-                        <span>📅 <?php echo htmlspecialchars($training['date']); ?></span>
-                        <?php if (!empty($training['location'])): ?>
-                        <span>📍 <?php echo htmlspecialchars($training['location']); ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <div class="training-tags">
-                        <?php if (!empty($training['badge'])): ?>
-                        <span class="training-cert-badge">✓ <?php echo htmlspecialchars($training['badge']); ?></span>
-                        <?php endif; ?>
-                    </div>
-                    <?php if (!empty($training['tech'])): ?>
-                    <div class="proj-chips training-tech">
-                        <?php foreach ($training['tech'] as $t): ?>
-                        <?php echo renderTechChip($t); ?>
-                        <?php endforeach; ?>
-                    </div>
-                    <?php endif; ?>
-                    <ul>
-                        <?php foreach ($training['items'] as $item): ?>
-                        <li><?php echo htmlspecialchars($item); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <?php if (!empty($training['results'])): ?>
-                    <div class="training-results">
-                        <h5><?php echo htmlspecialchars(t('training_results')); ?></h5>
-                        <div class="training-results-grid">
-                            <?php foreach ($training['results'] as $result): ?>
-                            <figure class="training-result-item">
-                                <a href="<?php echo htmlspecialchars($result['image']); ?>" target="_blank" rel="noopener" title="<?php echo htmlspecialchars($result['label']); ?>">
-                                    <img src="<?php echo htmlspecialchars($result['image']); ?>" alt="<?php echo htmlspecialchars($result['label']); ?>" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid';">
-                                    <span class="training-result-fallback" style="display:none;">🖼️</span>
-                                </a>
-                                <figcaption><?php echo htmlspecialchars($result['label']); ?></figcaption>
-                            </figure>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                    <?php endif; ?>
-                </article>
-                <?php endforeach; ?>
+            <div class="cta-activities">
+                <div class="cta-activities-text">
+                    <span class="tag"><?php echo t('nav_activities'); ?></span>
+                    <h2><?php echo t('activities_teaser_heading'); ?></h2>
+                    <p><?php echo htmlspecialchars(t('activities_teaser_desc')); ?></p>
+                </div>
+                <a href="kegiatan.php" class="btn btn-primary"><?php echo t('activities_teaser_cta'); ?> →</a>
             </div>
         </div>
     </section>
-    <?php endif; ?>
 <?php require __DIR__ . '/inc/footer.php'; ?>

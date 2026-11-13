@@ -38,6 +38,9 @@ function techPillKeys(): array
         'Adobe InDesign'        => ['indesign'],
         'PHP'                   => ['php'],
         'Laravel'               => ['laravel'],
+        'Git'                   => ['git'],
+        'Git & GitHub'          => ['git'],
+        'Tailwind CSS'          => ['tailwind'],
     ];
 
     foreach (($GLOBALS['techSkillPills'] ?? []) as $pill) {
@@ -58,6 +61,11 @@ function techPillKeys(): array
         ['name' => 'Chart.js',         'icon' => 'chartjs',    'color' => '#ff6384', 'keys' => ['chart']],
         ['name' => 'Express',          'icon' => 'express',    'color' => '#ffffff', 'keys' => ['express']],
         ['name' => 'PostgreSQL',       'icon' => 'postgres',   'color' => '#336791', 'keys' => ['postgres', 'postgresql']],
+        ['name' => 'Python',           'icon' => 'py',         'color' => '#3776ab', 'keys' => ['python']],
+        ['name' => 'FastAPI',          'icon' => 'fastapi',    'color' => '#009688', 'keys' => ['fastapi']],
+        ['name' => 'PyQt',             'icon' => 'qt',         'color' => '#41cd52', 'keys' => ['pyqt', 'pyqt6', 'qt']],
+        ['name' => 'Prisma',           'icon' => 'prisma',     'color' => '#2d3748', 'keys' => ['prisma']],
+        ['name' => 'Leaflet',          'icon' => 'leaflet',    'color' => '#199900', 'keys' => ['leaflet']],
     ] as $alias) {
         foreach ($alias['keys'] as $key) {
             $map[$key] = $alias;
@@ -103,4 +111,50 @@ function renderTechChip(string $tech): string
             htmlspecialchars($pill['name']) . '" loading="lazy" onerror="this.style.display=\'none\';">';
     }
     return '<span class="proj-chip proj-chip-tech">' . $chips . '<span>' . htmlspecialchars($tech) . '</span></span>';
+}
+
+/**
+ * Deretan ikon brand saja (untuk kartu listing yang ringkas).
+ * Nama teknologi lengkap tetap tersedia lewat title/tooltip.
+ */
+function renderTechIcons(array $tech, int $limit = 6): string
+{
+    $pills = [];
+
+    foreach ($tech as $item) {
+        foreach (techMatches((string) $item) as $pill) {
+            $name = $pill['name'];
+            if (!isset($pills[$name])) {
+                $pills[$name] = $pill;
+            }
+        }
+    }
+
+    if (!$pills) {
+        $first = trim(strip_tags((string) reset($tech)));
+        return $first === ''
+            ? ''
+            : '<span class="proj-chip proj-chip-text">' . htmlspecialchars($first) . '</span>';
+    }
+
+    $shown  = array_slice($pills, 0, $limit, true);
+    $hidden = array_slice($pills, $limit, null, true);
+
+    $html = '<span class="tech-icon-stack" role="list" aria-label="Tech stack">';
+    foreach ($shown as $pill) {
+        $src  = $pill['local_icon'] ?? 'https://skillicons.dev/icons?i=' . $pill['icon'];
+        $name = htmlspecialchars($pill['name']);
+        $html .= '<span class="tech-icon" role="listitem" title="' . $name . '" data-tip="' . $name . '">'
+            . '<img src="' . htmlspecialchars($src) . '" alt="' . $name . '" loading="lazy"'
+            . ' onerror="this.style.display=\'none\';this.parentElement.classList.add(\'is-missing\');">'
+            . '</span>';
+    }
+    $html .= '</span>';
+
+    if ($hidden) {
+        $names = htmlspecialchars(implode(', ', array_keys($hidden)));
+        $html .= '<span class="proj-chip proj-chip-more tech-more" title="' . $names . '">+' . count($hidden) . '</span>';
+    }
+
+    return $html;
 }
