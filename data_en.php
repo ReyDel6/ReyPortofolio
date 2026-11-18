@@ -155,6 +155,43 @@ $services = [
 $projects = [
 
     [
+        'title'    => 'ReyDev Autonomous Web Studio — 3D Virtual AI Office & Multi-Agent Engineering Suite',
+        'year'     => '2026',
+        'role'     => 'Lead AI Systems Architect & Creative Technologist',
+        'tag'      => 'Featured Project • AI Multi-Agent & 3D Web Graphics',
+        'category' => 'web',
+        'badge'    => 'Three.js + Multi-Agent AI',
+        'image'    => 'assets/reydev-studio-logo.svg',
+        'initial'  => 'ReyDev',
+        'github'   => 'https://github.com/ReyDel6/reydev-web-studio',
+        'live'     => 'https://splendor-naming-sketch.ngrok-free.dev',
+        'desc'     => 'An interactive 3D virtual office simulation and autonomous web engineering platform powered by <strong>12 Specialized AI Agents</strong>. Combines lightweight <strong>Isometric Three.js 3D rendering</strong> with 16 switchable styles, conversational code generation (HTML5, Tailwind, JS) from natural dialogue, social media CRM automation (Instagram &amp; TikTok lead intelligence), 9:16 vertical Reels video rendering via headless Chrome &amp; FFmpeg, and two-way remote control via <strong>Telegram Bot (@reydev_ai_bot)</strong>.',
+        'points'   => [
+            '<strong>Isometric 3D Virtual Office Simulation (Three.js)</strong> — Interactive 3D office environment featuring 16 switchable stylistic themes (Clay, Diorama, Voxel, Felt, Hologram, etc.) running at 60 FPS on mobile and desktop without heavy 3D assets.',
+            '<strong>12 Cross-Functional AI Specialists</strong> — Structured division of labor: Arka (Architect), Dara (UI Designer), Elang (Fullstack Engineer), Bagas (Code Auditor), Radit (Cloud Deployer), Social CRM Squad (Neo, Cody, Oliver, Jasper), and Creative Video Division (Rian, Maya, Gema).',
+            '<strong>Autonomous Web Scaffolding &amp; Specifications</strong> — Agents autonomously produce production-grade PRD.md, Technical Architecture Specs, Design Tokens, and responsive HTML5/Tailwind index.html directly into live output directories.',
+            '<strong>Social CRM &amp; Lead Conversion Intelligence</strong> — Sub-3s automated comment replies on TikTok/Instagram, follower-gate verification, HOT/WARM/COLD lead scoring, and automated DM dispatch with personalized website links.',
+            '<strong>Automated 9:16 Creative Reels Video Division</strong> — Generates 3-second viral hooks, 5-scene visual storyboards, synthesized natural Indonesian voiceovers, and compiles final vertical MP4 reels automatically via headless browser rendering.',
+            '<strong>Bi-Directional Telegram Bot Integration (@reydev_ai_bot)</strong> — Real-time remote office orchestration via Telegram chat, inline keyboard sanitization, and continuous conversational project guidance.',
+        ],
+        'tech'     => [
+            '3D Engine: Three.js (WebGL, Isometric Camera, Dynamic Lighting)',
+            'Frontend Core: React 19, TypeScript, Vite, Tailwind CSS',
+            'AI Orchestration: Antigravity Multi-Agent Engine + Google Gemini API',
+            'Video & Media Processing: Headless Chromium CDP, FFmpeg Audio/Video Synth',
+            'Bot & Automation: Telegram Bot API (Long-Polling & Webhooks)',
+            'Tunnel & Networking: Ngrok Secure TLS Tunneling + Node.js Middleware',
+        ],
+        'previews' => [
+            ['file' => 'assets/reydev-studio-overview.png', 'label' => 'Isometric 3D Virtual Office (3 Divisions & 12 AI Specialists)'],
+            ['file' => 'assets/reydev-studio-smartphone.png', 'label' => 'Smartphone Communicator (Consultative Chat & Quick Action Chips)'],
+            ['file' => 'assets/reydev-studio-creative-reels.png', 'label' => 'Studio Creative Reels 9:16 (Storyboard, Scene Preview & Auto MP4 Render)'],
+            ['file' => 'assets/reydev-studio-sosmed-crm.png', 'label' => 'Social Media CRM & Lead Intelligence (Follower Gate & Auto-DM)'],
+            ['file' => 'assets/reydev-studio-telegram.png', 'label' => 'Two-Way Remote Control via Telegram Bot (@reydev_ai_bot)'],
+        ],
+    ],
+
+    [
         'title'    => 'NexBrew — Smart Coffeeshop POS & Roastery Ecosystem',
         'year'     => '2026',
         'role'     => 'Lead Fullstack Architect & UI/UX Designer',
@@ -1401,6 +1438,41 @@ $projects = [
 
         ],
 
+    ],
+
+    [
+        'title'    => 'Nexus LMS — Learning Management System (Demo)',
+        'year'     => '2026',
+        'role'     => 'Fullstack Developer (Contributor, Nexus Dev Team)',
+        'tag'      => 'Team Project • EdTech Platform',
+        'category' => 'web',
+        'badge'    => 'Laravel 11 • PHP 8.3',
+        'image'    => 'assets/nexus-lms-logo.png',
+        'initial'  => 'NEXUS\nLMS',
+        'github'   => 'https://github.com/NexusDevWeb/LMS-Demo.git',
+        'live'     => '',
+        'desc'     => 'An integrated school <strong>Learning Management System (LMS)</strong> and academic management platform developed as a <strong>showcase/demo system</strong> by the Nexus Dev Team. It brings together digital learning, academic administration, attendance, assessments, and reporting in a role-based ecosystem.',
+        'points'   => [
+            '<strong>Digital Learning Suite</strong> — Multi-format learning materials (PDF, PPT, video/YouTube, links), assignments with deadlines & feedback, discussion forums, and an academic calendar.',
+            '<strong>Attendance & Monitoring</strong> — QR-based attendance, self check-in, GPS geofencing, manual input, attendance analytics, and WhatsApp notification integration.',
+            '<strong>CBT & E-Report Cards</strong> — Online exams (CBT) with question banks & timers, automated/structured grading, and PDF e-report generation with exportable reports.',
+            '<strong>Security & Administration</strong> — Role-Based Access Control (multi-role), activity audit logs, session monitoring, and data backup utilities.',
+        ],
+        'tech'     => [
+            'Backend: Laravel 11 (PHP 8.3+)',
+            'Frontend: Blade, Bootstrap 5.3, Vite',
+            'Database: MySQL 8.0+ / MariaDB',
+            'Libraries: DomPDF, Maatwebsite Excel, Simple QR Code',
+            'Visualization: Chart.js & ApexCharts',
+        ],
+        'previews' => [
+            ['file' => 'assets/nexus-lms-dashboard.png', 'label' => 'LMS Dashboard View (Web)'],
+            ['file' => 'assets/nexus-lms-login.png', 'label' => 'Login Page View (Web)'],
+            ['file' => 'assets/nexus-lms-elearning.png', 'label' => 'E-Learning Portal & Materials (Web)'],
+            ['file' => 'assets/nexus-lms-attendance.png', 'label' => '3-Method Attendance Hub (Web)'],
+            ['file' => 'assets/nexus-lms-classes.png', 'label' => 'Class Data Management (Web)'],
+            ['file' => 'assets/nexus-lms-reports.png', 'label' => 'Academic Reports & Recaps (Web)'],
+        ],
     ],
 
 ];

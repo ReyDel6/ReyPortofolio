@@ -153,6 +153,43 @@ $services = [
 $projects = [
 
     [
+        'title'    => 'ReyDev Autonomous Web Studio — 3D Virtual AI Office & Multi-Agent Engineering Suite',
+        'year'     => '2026',
+        'role'     => 'Lead AI Systems Architect & Creative Technologist',
+        'tag'      => 'Karya Unggulan • AI Multi-Agent & 3D Web Graphics',
+        'category' => 'web',
+        'badge'    => 'Three.js + Multi-Agent AI',
+        'image'    => 'assets/reydev-studio-logo.svg',
+        'initial'  => 'ReyDev',
+        'github'   => 'https://github.com/ReyDel6/reydev-web-studio',
+        'live'     => 'https://splendor-naming-sketch.ngrok-free.dev',
+        'desc'     => 'Platform simulasi kantor virtual 3D interaktif dan studio rekayasa web otonom yang ditenagai oleh <strong>12 Agen AI Terspesialisasi</strong>. Mengintegrasikan rendering <strong>Three.js 3D Isometrik</strong> dengan 16 tema gaya, orkestrasi pembuatan website nyata (HTML5, Tailwind, JS) secara instan dari dialog percakapan, sistem automasi pemasaran media sosial (Instagram &amp; TikTok CRM), generator video vertikal Reels 9:16 otomatis via headless Chrome &amp; FFmpeg, serta kontrol remote dua arah via <strong>Bot Telegram (@reydev_ai_bot)</strong>.',
+        'points'   => [
+            '<strong>Simulasi Kantor Virtual 3D Isometrik (Three.js)</strong> — Render ruang kantor interaktif 3D dengan 16 tema dinamis (Clay, Diorama, Voxel, Felt, Hologram, Angkringan, dll.) yang berjalan mulus 60 FPS dan responsif di mobile &amp; desktop tanpa aset 3D berat.',
+            '<strong>Orkestrasi 12 Spesialis AI Lintas Divisi</strong> — Pembagian peran profesional nyata: Arka (Architect), Dara (Designer), Elang (Fullstack Engineer), Bagas (Auditor), Radit (Deployer), Divisi Marketing CRM (Neo, Cody, Oliver, Jasper), serta Divisi Creative (Rian, Maya, Gema).',
+            '<strong>Penyusunan Kode Web &amp; Spesifikasi Nyata</strong> — AI secara otonom menghasilkan dokumen PRD.md, Technical Architecture Spec, Design Tokens warna/tipografi, hingga file website index.html interaktif siap pakai ke direktori output.',
+            '<strong>Social CRM &amp; Lead Conversion Intelligence</strong> — Auto-reply komentar Instagram &amp; TikTok dalam &lt;3 detik, verifikasi follower gate, kualifikasi prospek HOT/WARM/COLD, dan pengiriman DM otomatis berisi tautan website &amp; penawaran promo.',
+            '<strong>Divisi Creative Video Reels 9:16 Otomatis</strong> — Generator naskah viral hook 3 detik, storyboard visual 5 scene, sintesis audio voiceover bahasa Indonesia natural, dan auto-render video format MP4 vertikal resolusi tinggi.',
+            '<strong>Integrasi Bot Telegram Dua Arah (@reydev_ai_bot)</strong> — Kendali studio jarak jauh via pesan Telegram, sanitasi inline keyboard realtime, dan kemampuan konsultasi santai maupun perintah pembuatan fitur baru.',
+        ],
+        'tech'     => [
+            '3D Engine: Three.js (WebGL, Isometric Camera, Dynamic Lighting)',
+            'Frontend Core: React 19, TypeScript, Vite, Tailwind CSS',
+            'AI Orchestration: Antigravity Multi-Agent Engine + Google Gemini API',
+            'Video & Media Processing: Headless Chromium CDP, FFmpeg Audio/Video Synth',
+            'Bot & Automation: Telegram Bot API (Long-Polling & Webhooks)',
+            'Tunnel & Networking: Ngrok Secure TLS Tunneling + Node.js Middleware',
+        ],
+        'previews' => [
+            ['file' => 'assets/reydev-studio-overview.png', 'label' => 'Kantor 3D Isometrik 3 Divisi & 12 Spesialis AI (Three.js)'],
+            ['file' => 'assets/reydev-studio-smartphone.png', 'label' => 'Smartphone Communicator (Chat Konsultatif & Quick Action Chips)'],
+            ['file' => 'assets/reydev-studio-creative-reels.png', 'label' => 'Studio Creative Reels 9:16 (Storyboard, Scene Preview & Auto MP4 Render)'],
+            ['file' => 'assets/reydev-studio-sosmed-crm.png', 'label' => 'Social Media CRM & Lead Intelligence (Follower Gate & Auto-DM)'],
+            ['file' => 'assets/reydev-studio-telegram.png', 'label' => 'Integrasi Remote Dua Arah via Bot Telegram (@reydev_ai_bot)'],
+        ],
+    ],
+
+    [
         'title'    => 'NexBrew — Smart Coffeeshop POS & Roastery Ecosystem',
         'year'     => '2026',
         'role'     => 'Lead Fullstack Architect & UI/UX Designer',
@@ -1397,6 +1434,41 @@ $projects = [
 
         ],
 
+    ],
+
+    [
+        'title'    => 'Nexus LMS — Learning Management System (Demo)',
+        'year'     => '2026',
+        'role'     => 'Fullstack Developer (Kontributor, Nexus Dev Team)',
+        'tag'      => 'Proyek Tim • EdTech Platform',
+        'category' => 'web',
+        'badge'    => 'Laravel 11 • PHP 8.3',
+        'image'    => 'assets/nexus-lms-logo.png',
+        'initial'  => 'NEXUS\nLMS',
+        'github'   => 'https://github.com/NexusDevWeb/LMS-Demo.git',
+        'live'     => '',
+        'desc'     => 'Platform <strong>Learning Management System (LMS)</strong> dan manajemen akademik sekolah terintegrasi yang dikembangkan sebagai <strong>showcase/demo system</strong> oleh Nexus Dev Team. Sistem ini mencakup pembelajaran digital, administrasi akademik, presensi, ujian, hingga pelaporan dalam satu ekosistem berbasis peran.',
+        'points'   => [
+            '<strong>Digital Learning Suite</strong> — Manajemen materi multi-format (PDF, PPT, video/YouTube, tautan), tugas dengan deadline & feedback, forum diskusi, serta kalender akademik.',
+            '<strong>Presensi & Monitoring</strong> — Kehadiran via QR, self check-in, geofencing GPS, input manual, analitik kehadiran, dan integrasi notifikasi WhatsApp.',
+            '<strong>CBT & E-Raport</strong> — Ujian online (CBT) dengan bank soal & timer, penilaian otomatis/terstruktur, serta generator e-raport PDF dan ekspor laporan.',
+            '<strong>Keamanan & Administrasi</strong> — Role-Based Access Control (multi-peran), audit log aktivitas, pemantauan sesi, dan utilitas backup data.',
+        ],
+        'tech'     => [
+            'Backend: Laravel 11 (PHP 8.3+)',
+            'Frontend: Blade, Bootstrap 5.3, Vite',
+            'Database: MySQL 8.0+ / MariaDB',
+            'Libraries: DomPDF, Maatwebsite Excel, Simple QR Code',
+            'Visualization: Chart.js & ApexCharts',
+        ],
+        'previews' => [
+            ['file' => 'assets/nexus-lms-dashboard.png', 'label' => 'Tampilan Dashboard LMS (Web)'],
+            ['file' => 'assets/nexus-lms-login.png', 'label' => 'Tampilan Halaman Login (Web)'],
+            ['file' => 'assets/nexus-lms-elearning.png', 'label' => 'Portal E-Learning & Materi (Web)'],
+            ['file' => 'assets/nexus-lms-attendance.png', 'label' => 'Pusat Absensi 3 Metode (Web)'],
+            ['file' => 'assets/nexus-lms-classes.png', 'label' => 'Manajemen Data Kelas (Web)'],
+            ['file' => 'assets/nexus-lms-reports.png', 'label' => 'Rekap & Laporan Akademik (Web)'],
+        ],
     ],
 
 ];

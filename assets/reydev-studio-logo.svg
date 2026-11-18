@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="256" height="256" role="img" aria-label="ReyDev Studio">
+  <title>ReyDev Studio</title>
+  <defs>
+    <linearGradient id="rdg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <linearGradient id="rdg2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="24" fill="url(#rdg2)"/>
+  <!-- Isometric 3D Office Cube -->
+  <path d="M50 20 L80 36 L50 52 L20 36 Z" fill="#818cf8" fill-opacity="0.9"/>
+  <path d="M20 36 L50 52 L50 82 L20 66 Z" fill="#6366f1" fill-opacity="0.8"/>
+  <path d="M80 36 L50 52 L50 82 L80 66 Z" fill="#4f46e5" fill-opacity="0.95"/>
+  <!-- AI Core Sparkle / Node -->
+  <circle cx="50" cy="52" r="5" fill="#facc15"/>
+  <path d="M50 42 L50 62 M40 52 L60 52" stroke="#fef08a" stroke-width="2.5" stroke-linecap="round"/>
+</svg>
