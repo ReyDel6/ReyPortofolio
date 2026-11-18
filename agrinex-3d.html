@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AGRINEX • 3D Digital Twin IoT Smart Farming Node</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent-green: #10b981;
+      --accent-cyan: #06b6d4;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --accent-blue: #3b82f6;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg);
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: var(--text);
+    }
+    #canvas3d {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+      cursor: grab;
+    }
+    #canvas3d:active {
+      cursor: grabbing;
+    }
+
+    /* UI Overlay Layer */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px 24px;
+    }
+
+    /* Header */
+    .header-bar {
+      pointer-events: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 12px 20px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #059669, #0d9488);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pulse-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 8px #34d399;
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .btn-top {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-top:hover {
+      background: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Telemetry HUD (Left Side Floating) */
+    .hud-panel {
+      pointer-events: auto;
+      position: absolute;
+      top: 96px;
+      left: 24px;
+      width: 320px;
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hud-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 8px;
+    }
+    .hud-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .node-id {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .telemetry-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .metric-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 10px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .metric-val {
+      font-size: 18px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .metric-unit {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+    .metric-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+    .metric-bar {
+      height: 100%;
+      width: 45%;
+      border-radius: 2px;
+      transition: width 0.4s ease, background 0.4s ease;
+    }
+
+    /* Bottom Control Bar */
+    .bottom-bar {
+      pointer-events: auto;
+      background: var(--card-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 14px 20px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .action-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+    .action-btn.active {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-color: #34d399;
+      box-shadow: 0 4px 18px rgba(16, 185, 129, 0.45);
+    }
+    .action-btn.active-rain {
+      background: linear-gradient(135deg, #0ea5e9, #0284c7);
+      border-color: #38bdf8;
+      box-shadow: 0 4px 18px rgba(14, 165, 233, 0.45);
+    }
+    .action-btn.active-xray {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+      border-color: #a78bfa;
+      box-shadow: 0 4px 18px rgba(139, 92, 246, 0.45);
+    }
+
+    .cam-pills {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 4px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .cam-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .cam-btn.active, .cam-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .sun-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .sun-slider-wrap input[type=range] {
+      width: 100px;
+      accent-color: #f59e0b;
+      cursor: pointer;
+    }
+
+    /* Tip info box */
+    .drag-hint {
+      position: absolute;
+      bottom: 96px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      animation: fadeInOut 6s forwards;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translate(-50%, 8px); }
+      15% { opacity: 1; transform: translate(-50%, 0); }
+      80% { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .overlay { padding: 12px; }
+      .hud-panel {
+        top: 76px;
+        left: 12px;
+        right: 12px;
+        width: auto;
+        padding: 12px;
+      }
+      .bottom-bar {
+        padding: 10px 14px;
+        gap: 10px;
+      }
+      .action-btn { padding: 8px 12px; font-size: 12px; }
+      .cam-pills { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Three.js Canvas -->
+  <canvas id="canvas3d"></canvas>
+
+  <!-- Drag Hint -->
+  <div class="drag-hint">
+    <span>🖱️ Drag mouse untuk rotasi 360° • Scroll untuk zoom • Klik komponen untuk fokus</span>
+  </div>
+
+  <!-- UI Overlay -->
+  <div class="overlay">
+    <!-- Header -->
+    <header class="header-bar">
+      <div class="brand-group">
+        <div class="logo-badge">🌱</div>
+        <div>
+          <div class="brand-title">
+            AGRINEX • 3D Digital Twin
+            <span class="status-pill"><span class="pulse-dot"></span> LIVE EDGE-AI NODE</span>
+          </div>
+          <div class="brand-sub">Prototipe TRL-3 • Solar Harvesting • Drip Irrigation • Soil Sensing</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <a href="project-detail.php?p=16" class="btn-top">
+          ← Kembali ke Detail Portofolio
+        </a>
+      </div>
+    </header>
+
+    <!-- Telemetry HUD Panel (Left Side) -->
+    <div class="hud-panel">
+      <div class="hud-header">
+        <span class="hud-title">⚡ REALTIME TELEMETRY</span>
+        <span class="node-id">ESP32-NODE #01</span>
+      </div>
+
+      <div class="telemetry-row">
+        <!-- Soil Moisture -->
+        <div class="metric-card">
+          <div class="metric-label">🪴 Kelembapan Tanah</div>
+          <div class="metric-val" id="valSoil">38 <span class="metric-unit">%</span></div>
+          <div class="metric-bar-wrap">
+            <div class="metric-bar" id="barSoil" style="width: 38%; background: #f59e0b;"></div>
+          </div>
+        </div>
+
+        <!-- Rain Sensor -->
+        <div class="metric-card">
+          <div class="metric-label">🌧️ Sensor Hujan</div>
+          <div class="metric-val" id="valRain" style="font-size: 15px; color: #10b981;">DRY</div>
+          <div class="metric-bar-wrap">
+            <div class="metric-bar" id="barRain" style="width: 0%; background: #38bdf8;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="telemetry-row">
+        <!-- Solar Harvest -->
+        <div class="metric-card">
+          <div class="metric-label">☀️ Solar Power</div>
+          <div class="metric-val" id="valSolar">4.8 <span class="metric-unit">W</span></div>
+          <div class="metric-bar-wrap">
+            <div class="metric-bar" id="barSolar" style="width: 80%; background: #facc15;"></div>
+          </div>
+        </div>
+
+        <!-- Pump Status -->
+        <div class="metric-card">
+          <div class="metric-label">💧 Pompa Irigasi</div>
+          <div class="metric-val" id="valPump" style="font-size: 15px; color: #94a3b8;">STANDBY</div>
+          <div class="metric-bar-wrap">
+            <div class="metric-bar" id="barPump" style="width: 0%; background: #10b981;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="telemetry-row">
+        <!-- Battery -->
+        <div class="metric-card">
+          <div class="metric-label">🔋 Baterai Li-Ion</div>
+          <div class="metric-val">4.12 <span class="metric-unit">V (94%)</span></div>
+        </div>
+
+        <!-- Microcontroller -->
+        <div class="metric-card">
+          <div class="metric-label">🧠 CPU / Link</div>
+          <div class="metric-val" style="font-size: 14px; color: #34d399;">LoRa 915MHz</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Action Bar -->
+    <footer class="bottom-bar">
+      <!-- Interactive Action Buttons -->
+      <div class="action-buttons">
+        <button class="action-btn" id="btnPump" onclick="togglePump()">
+          💧 Pompa Irigasi: OFF
+        </button>
+        <button class="action-btn" id="btnRain" onclick="toggleRain()">
+          🌧️ Simulasi Hujan: OFF
+        </button>
+        <button class="action-btn" id="btnXray" onclick="toggleXray()">
+          🔍 Exploded / X-Ray
+        </button>
+      </div>
+
+      <!-- Camera Presets -->
+      <div class="cam-pills">
+        <button class="cam-btn active" onclick="setCamView('iso', this)">Isometrik</button>
+        <button class="cam-btn" onclick="setCamView('tower', this)">Tower & Solar</button>
+        <button class="cam-btn" onclick="setCamView('soil', this)">Tanah & Pompa</button>
+      </div>
+
+      <!-- Sun Slider -->
+      <div class="sun-slider-wrap">
+        <span>☀️ Surya</span>
+        <input type="range" id="sunSlider" min="0" max="100" value="80" oninput="updateSunlight(this.value)">
+      </div>
+    </footer>
+  </div>
+
+  <!-- Three.js + OrbitControls from cdnjs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+
+  <script>
+    // Audio Synthesizer via Web Audio API (Zero external MP3 dependency)
+    let audioCtx = null;
+    function playBeep(freq = 600, type = 'sine', duration = 0.08) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    // ---------------- Three.js Scene Setup ----------------
+    const canvas = document.getElementById('canvas3d');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0a0f1d);
+    scene.fog = new THREE.FogExp2(0x0a0f1d, 0.022);
+
+    const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(11, 10, 13);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.maxPolarAngle = Math.PI / 2 - 0.04;
+    controls.minDistance = 4;
+    controls.maxDistance = 24;
+    controls.target.set(0, 1.5, 0);
+
+    // ---------------- Lighting ----------------
+    const ambientLight = new THREE.AmbientLight(0xdbeafe, 0.7);
+    scene.add(ambientLight);
+
+    const sunLight = new THREE.DirectionalLight(0xfffaed, 1.6);
+    sunLight.position.set(8, 14, 6);
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.width = 2048;
+    sunLight.shadow.mapSize.height = 2048;
+    sunLight.shadow.camera.near = 0.5;
+    sunLight.shadow.camera.far = 35;
+    sunLight.shadow.camera.left = -8;
+    sunLight.shadow.camera.right = 8;
+    sunLight.shadow.camera.top = 8;
+    sunLight.shadow.camera.bottom = -8;
+    sunLight.shadow.bias = -0.0005;
+    scene.add(sunLight);
+
+    const fillLight = new THREE.DirectionalLight(0x38bdf8, 0.4);
+    fillLight.position.set(-8, 6, -8);
+    scene.add(fillLight);
+
+    // Grid Floor
+    const gridHelper = new THREE.GridHelper(30, 30, 0x1e293b, 0x0f172a);
+    gridHelper.position.y = -0.01;
+    scene.add(gridHelper);
+
+    // Ground plane to receive shadows
+    const groundGeo = new THREE.PlaneGeometry(60, 60);
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0x070b14, roughness: 0.9, metalness: 0.1 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.receiveShadow = true;
+    scene.add(ground);
+
+    // ---------------- Procedural Textures ----------------
+    // 1. Solar Cell Texture
+    function createSolarTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#0f172a';
+      ctx.fillRect(0, 0, 512, 512);
+
+      // Grid wafers
+      ctx.strokeStyle = '#1e3a8a';
+      ctx.lineWidth = 3;
+      for (let x = 0; x <= 512; x += 64) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 512); ctx.stroke();
+      }
+      for (let y = 0; y <= 512; y += 64) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(512, y); ctx.stroke();
+      }
+      // Silver conductive busbars
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 4;
+      ctx.beginPath(); ctx.moveTo(128, 0); ctx.lineTo(128, 512); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(256, 0); ctx.lineTo(256, 512); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(384, 0); ctx.lineTo(384, 512); ctx.stroke();
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.wrapT = THREE.RepeatWrapping;
+      return tex;
+    }
+
+    // 2. Raindrop Sensor Serpentine Trace Texture
+    function createRainSensorTexture() {
+      const c = document.createElement('canvas');
+      c.width = 256;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#111827';
+      ctx.fillRect(0, 0, 256, 256);
+
+      // Gold serpentine tracks
+      ctx.strokeStyle = '#f59e0b';
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      for (let y = 20; y < 240; y += 22) {
+        ctx.beginPath();
+        ctx.moveTo(20, y);
+        ctx.lineTo(236, y);
+        ctx.stroke();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      return tex;
+    }
+
+    // 3. Soil Texture with organic bumps
+    function createSoilTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 512;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#5c3a21';
+      ctx.fillRect(0, 0, 512, 512);
+
+      for (let i = 0; i < 4000; i++) {
+        const x = Math.random() * 512;
+        const y = Math.random() * 512;
+        const r = Math.random() * 2.5;
+        ctx.fillStyle = Math.random() > 0.5 ? '#3e2312' : '#734829';
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      return new THREE.CanvasTexture(c);
+    }
+
+    // Materials
+    const peachPlasticMat = new THREE.MeshStandardMaterial({
+      color: 0xf5b596, // exact physical prototype 3D printed peach color
+      roughness: 0.45,
+      metalness: 0.05
+    });
+
+    const acrylicMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.35,
+      roughness: 0.1,
+      metalness: 0.1,
+      transmission: 0.85,
+      ior: 1.45
+    });
+
+    const soilTex = createSoilTexture();
+    const soilMat = new THREE.MeshStandardMaterial({
+      color: 0x6e4326,
+      map: soilTex,
+      roughness: 0.88,
+      metalness: 0.02
+    });
+
+    const solarTex = createSolarTexture();
+    const solarMat = new THREE.MeshStandardMaterial({
+      map: solarTex,
+      roughness: 0.2,
+      metalness: 0.8,
+      color: 0x1e3a8a
+    });
+
+    const rainSensorTex = createRainSensorTexture();
+    const rainSensorMat = new THREE.MeshStandardMaterial({
+      map: rainSensorTex,
+      roughness: 0.35,
+      metalness: 0.6
+    });
+
+    // ---------------- Build Agrinex IoT Prototype 3D Geometry ----------------
+    const modelGroup = new THREE.Group();
+    scene.add(modelGroup);
+
+    // 1. BASE SOIL BED TRAY (Square Bed from Prototype)
+    const trayW = 4.8;
+    const trayL = 4.8;
+    const trayH = 0.7;
+
+    // Outer Tray Walls
+    const trayBase = new THREE.Mesh(
+      new THREE.BoxGeometry(trayW, 0.1, trayL),
+      peachPlasticMat
+    );
+    trayBase.position.set(0, 0.05, 0);
+    trayBase.castShadow = true;
+    trayBase.receiveShadow = true;
+    modelGroup.add(trayBase);
+
+    // Acrylic Rim
+    const rimThick = 0.08;
+    const rimMat = acrylicMat;
+    const rimN = new THREE.Mesh(new THREE.BoxGeometry(trayW, trayH, rimThick), rimMat);
+    rimN.position.set(0, trayH / 2, -trayL / 2);
+    const rimS = new THREE.Mesh(new THREE.BoxGeometry(trayW, trayH, rimThick), rimMat);
+    rimS.position.set(0, trayH / 2, trayL / 2);
+    const rimW = new THREE.Mesh(new THREE.BoxGeometry(rimThick, trayH, trayL), rimMat);
+    rimW.position.set(-trayW / 2, trayH / 2, 0);
+    const rimE = new THREE.Mesh(new THREE.BoxGeometry(rimThick, trayH, trayL), rimMat);
+    rimE.position.set(trayW / 2, trayH / 2, 0);
+    modelGroup.add(rimN, rimS, rimW, rimE);
+
+    // Soil Block inside Tray
+    const soilGeo = new THREE.BoxGeometry(trayW - 0.16, 0.48, trayL - 0.16);
+    const soilMesh = new THREE.Mesh(soilGeo, soilMat);
+    soilMesh.position.set(0, 0.25, 0);
+    soilMesh.receiveShadow = true;
+    modelGroup.add(soilMesh);
+
+    // 2. SIDE WATER TANK & MINI SUBMERSIBLE PUMP
+    const tankW = 1.3;
+    const tankL = 1.6;
+    const tankH = 0.8;
+    const tankX = trayW / 2 + tankW / 2 + 0.1;
+    const tankZ = 1.2;
+
+    const tankBox = new THREE.Mesh(
+      new THREE.BoxGeometry(tankW, tankH, tankL),
+      peachPlasticMat
+    );
+    tankBox.position.set(tankX, tankH / 2, tankZ);
+    tankBox.castShadow = true;
+    tankBox.receiveShadow = true;
+    modelGroup.add(tankBox);
+
+    // Water inside Tank
+    const waterMat = new THREE.MeshPhysicalMaterial({
+      color: 0x38bdf8,
+      transparent: true,
+      opacity: 0.65,
+      roughness: 0.05,
+      transmission: 0.8
+    });
+    const waterMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(tankW - 0.15, 0.5, tankL - 0.15),
+      waterMat
+    );
+    waterMesh.position.set(tankX, 0.35, tankZ);
+    modelGroup.add(waterMesh);
+
+    // Mini Pump Cylinder
+    const pumpMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.3 });
+    const pumpMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.45, 16), pumpMat);
+    pumpMesh.rotation.z = Math.PI / 2;
+    pumpMesh.position.set(tankX, 0.32, tankZ);
+    pumpMesh.castShadow = true;
+    modelGroup.add(pumpMesh);
+
+    // 3. TRANSPARENT DRIP HOSE LOOP
+    const hoseCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(tankX, 0.45, tankZ),
+      new THREE.Vector3(trayW / 2, 0.55, 1.2),
+      new THREE.Vector3(trayW / 2 - 0.2, 0.52, trayL / 2 - 0.3),
+      new THREE.Vector3(-trayW / 2 + 0.3, 0.52, trayL / 2 - 0.3),
+      new THREE.Vector3(-trayW / 2 + 0.3, 0.52, -trayL / 2 + 0.3),
+      new THREE.Vector3(trayW / 2 - 0.4, 0.52, -trayL / 2 + 0.3)
+    ]);
+    const hoseGeo = new THREE.TubeGeometry(hoseCurve, 64, 0.05, 8, false);
+    const hoseMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.5,
+      roughness: 0.2,
+      transmission: 0.9
+    });
+    const hoseMesh = new THREE.Mesh(hoseGeo, hoseMat);
+    modelGroup.add(hoseMesh);
+
+    // Water flow particles inside tube
+    const flowCount = 60;
+    const flowGeo = new THREE.BufferGeometry();
+    const flowPos = new Float32Array(flowCount * 3);
+    flowGeo.setAttribute('position', new THREE.BufferAttribute(flowPos, 3));
+    const flowMat = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.12,
+      transparent: true,
+      opacity: 0
+    });
+    const flowPoints = new THREE.Points(flowGeo, flowMat);
+    modelGroup.add(flowPoints);
+
+    // 4. CORNER PILLAR & CONTROL ENCLOSURE TOWER
+    const pillarMat = peachPlasticMat;
+    const pillar = new THREE.Mesh(new THREE.BoxGeometry(0.35, 2.8, 0.35), pillarMat);
+    pillar.position.set(trayW / 2 - 0.4, 1.4, -trayL / 2 + 0.4);
+    pillar.castShadow = true;
+    modelGroup.add(pillar);
+
+    // Main Control Enclosure Group (For Exploded View animation)
+    const towerGroup = new THREE.Group();
+    towerGroup.position.set(trayW / 2 - 0.4, 2.7, -trayL / 2 + 0.4);
+    modelGroup.add(towerGroup);
+
+    // Lower Enclosure Box
+    const towerBoxLower = new THREE.Mesh(
+      new THREE.BoxGeometry(1.6, 1.4, 1.3),
+      peachPlasticMat
+    );
+    towerBoxLower.position.set(0, 0, 0);
+    towerBoxLower.castShadow = true;
+    towerGroup.add(towerBoxLower);
+
+    // Side Vents on Enclosure
+    const ventMat = new THREE.MeshBasicMaterial({ color: 0x1e293b });
+    for (let i = -0.25; i <= 0.25; i += 0.12) {
+      const vent = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.04, 0.5), ventMat);
+      vent.position.set(0.81, i, 0);
+      towerGroup.add(vent);
+    }
+
+    // Inside Components (Visible in X-Ray)
+    const insideGroup = new THREE.Group();
+    insideGroup.position.set(0, 0, 0);
+    towerGroup.add(insideGroup);
+
+    // ESP32 PCB
+    const pcbMat = new THREE.MeshStandardMaterial({ color: 0x064e3b, roughness: 0.4 });
+    const pcb = new THREE.Mesh(new THREE.BoxGeometry(0.65, 0.05, 0.9), pcbMat);
+    pcb.position.set(0, -0.15, 0);
+    insideGroup.add(pcb);
+
+    // ESP32 Shield (Metal)
+    const shieldMat = new THREE.MeshStandardMaterial({ color: 0xd1d5db, metalness: 0.9, roughness: 0.2 });
+    const shield = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.35), shieldMat);
+    shield.position.set(0, -0.09, -0.15);
+    insideGroup.add(shield);
+
+    // Blinking Telemetry LED
+    const ledGeo = new THREE.SphereGeometry(0.04, 8, 8);
+    const ledMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+    const led = new THREE.Mesh(ledGeo, ledMat);
+    led.position.set(0.22, -0.09, 0.25);
+    insideGroup.add(led);
+
+    // 18650 Battery
+    const battMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.3 });
+    const batt = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.9, 16), battMat);
+    batt.rotation.x = Math.PI / 2;
+    batt.position.set(-0.35, 0.15, 0);
+    insideGroup.add(batt);
+
+    // Top Lid (Explodes upward)
+    const topLidGroup = new THREE.Group();
+    topLidGroup.position.set(0, 0.7, 0);
+    towerGroup.add(topLidGroup);
+
+    const lidMesh = new THREE.Mesh(new THREE.BoxGeometry(1.64, 0.12, 1.34), peachPlasticMat);
+    lidMesh.castShadow = true;
+    topLidGroup.add(lidMesh);
+
+    // 5. TILTING SOLAR PANEL (Mounted on Top Lid)
+    const solarGroup = new THREE.Group();
+    solarGroup.position.set(0.15, 0.15, 0);
+    solarGroup.rotation.z = -0.42; // Tilt angle ~24 deg as on prototype
+    topLidGroup.add(solarGroup);
+
+    // Solar Panel Frame
+    const solarFrame = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 0.08, 1.1),
+      new THREE.MeshStandardMaterial({ color: 0xe2e8f0, metalness: 0.7, roughness: 0.3 })
+    );
+    solarFrame.castShadow = true;
+    solarGroup.add(solarFrame);
+
+    // Solar PV Face
+    const solarPV = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.3, 1.0),
+      solarMat
+    );
+    solarPV.rotation.x = -Math.PI / 2;
+    solarPV.position.y = 0.045;
+    solarGroup.add(solarPV);
+
+    // 6. RAINDROP SENSOR PCB MODULE (Beside Solar Panel on Top Platform)
+    const rainPCB = new THREE.Mesh(
+      new THREE.BoxGeometry(0.65, 0.04, 0.85),
+      rainSensorMat
+    );
+    rainPCB.position.set(-0.65, 0.12, 0.1);
+    rainPCB.castShadow = true;
+    topLidGroup.add(rainPCB);
+
+    // Rain PCB LED Indicator
+    const rainLedMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+    const rainLed = new THREE.Mesh(new THREE.SphereGeometry(0.035, 8, 8), rainLedMat);
+    rainLed.position.set(-0.65, 0.17, 0.45);
+    topLidGroup.add(rainLed);
+
+    // 7. CAPACITIVE SOIL MOISTURE PROBE (In Soil)
+    const probeGroup = new THREE.Group();
+    probeGroup.position.set(0.6, 0.5, -0.6);
+    modelGroup.add(probeGroup);
+
+    // Probe PCB
+    const probeMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(0.24, 0.9, 0.03),
+      new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4 })
+    );
+    probeMesh.position.y = 0;
+    probeMesh.castShadow = true;
+    probeGroup.add(probeMesh);
+
+    // Probe Metallic Prongs
+    const prongMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.8, roughness: 0.2 });
+    const prong1 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.45, 0.02), prongMat);
+    prong1.position.set(-0.06, -0.45, 0);
+    const prong2 = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.45, 0.02), prongMat);
+    prong2.position.set(0.06, -0.45, 0);
+    probeGroup.add(prong1, prong2);
+
+    // Wires from probe to tower
+    const wireCurve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(0.6, 0.9, -0.6),
+      new THREE.Vector3(1.2, 1.8, -1.2),
+      new THREE.Vector3(trayW / 2 - 0.4, 2.3, -trayL / 2 + 0.4)
+    ]);
+    const wireGeo = new THREE.TubeGeometry(wireCurve, 20, 0.02, 6, false);
+    const wireMat = new THREE.MeshStandardMaterial({ color: 0x111827 });
+    const wireMesh = new THREE.Mesh(wireGeo, wireMat);
+    modelGroup.add(wireMesh);
+
+    // ---------------- Rain Particles Simulation ----------------
+    const rainCount = 1200;
+    const rainGeo = new THREE.BufferGeometry();
+    const rainPositions = new Float32Array(rainCount * 3);
+    for (let i = 0; i < rainCount; i++) {
+      rainPositions[i * 3] = (Math.random() - 0.5) * 8;
+      rainPositions[i * 3 + 1] = Math.random() * 8 + 3;
+      rainPositions[i * 3 + 2] = (Math.random() - 0.5) * 8;
+    }
+    rainGeo.setAttribute('position', new THREE.BufferAttribute(rainPositions, 3));
+    const rainMat = new THREE.PointsMaterial({
+      color: 0x38bdf8,
+      size: 0.06,
+      transparent: true,
+      opacity: 0
+    });
+    const rainParticles = new THREE.Points(rainGeo, rainMat);
+    scene.add(rainParticles);
+
+    // ---------------- Interactive State Logic ----------------
+    let isPumpActive = false;
+    let isRainActive = false;
+    let isXrayActive = false;
+    let currentMoisture = 38;
+    let targetMoisture = 38;
+
+    // Toggle Pump
+    window.togglePump = function() {
+      isPumpActive = !isPumpActive;
+      playBeep(isPumpActive ? 880 : 330, 'sine', 0.1);
+      const btn = document.getElementById('btnPump');
+      const valPump = document.getElementById('valPump');
+      const barPump = document.getElementById('barPump');
+
+      if (isPumpActive) {
+        btn.classList.add('active');
+        btn.innerHTML = '💧 Pompa Irigasi: ON';
+        valPump.textContent = 'ACTIVE (12V)';
+        valPump.style.color = '#10b981';
+        barPump.style.width = '100%';
+        flowMat.opacity = 0.85;
+      } else {
+        btn.classList.remove('active');
+        btn.innerHTML = '💧 Pompa Irigasi: OFF';
+        valPump.textContent = 'STANDBY';
+        valPump.style.color = '#94a3b8';
+        barPump.style.width = '0%';
+        flowMat.opacity = 0;
+      }
+    };
+
+    // Toggle Rain
+    window.toggleRain = function() {
+      isRainActive = !isRainActive;
+      playBeep(isRainActive ? 750 : 400, 'triangle', 0.12);
+      const btn = document.getElementById('btnRain');
+      const valRain = document.getElementById('valRain');
+      const barRain = document.getElementById('barRain');
+
+      if (isRainActive) {
+        btn.classList.add('active-rain');
+        btn.innerHTML = '🌧️ Simulasi Hujan: ON';
+        rainMat.opacity = 0.75;
+        valRain.textContent = 'DETECTED';
+        valRain.style.color = '#f43f5e';
+        barRain.style.width = '100%';
+        rainLedMat.color.setHex(0xf43f5e); // LED turns red
+
+        // Over-watering protection logic
+        if (isPumpActive) {
+          togglePump(); // auto shutoff pump
+          alert('⚠️ Proteksi Over-watering: Sensor hujan mendeteksi presipitasi! Pompa irigasi dimatikan otomatis.');
+        }
+      } else {
+        btn.classList.remove('active-rain');
+        btn.innerHTML = '🌧️ Simulasi Hujan: OFF';
+        rainMat.opacity = 0;
+        valRain.textContent = 'DRY';
+        valRain.style.color = '#10b981';
+        barRain.style.width = '0%';
+        rainLedMat.color.setHex(0x10b981); // LED back to green
+      }
+    };
+
+    // Toggle Exploded View / X-Ray
+    window.toggleXray = function() {
+      isXrayActive = !isXrayActive;
+      playBeep(isXrayActive ? 900 : 450, 'sawtooth', 0.1);
+      const btn = document.getElementById('btnXray');
+
+      if (isXrayActive) {
+        btn.classList.add('active-xray');
+        // Animate lid up
+        new TWEEN.Tween(topLidGroup.position)
+          .to({ y: 1.8 }, 600)
+          .easing(TWEEN.Easing.Cubic.Out)
+          .start();
+        // Animate inside components outward slightly
+        new TWEEN.Tween(batt.position)
+          .to({ x: -0.65 }, 600)
+          .easing(TWEEN.Easing.Cubic.Out)
+          .start();
+      } else {
+        btn.classList.remove('active-xray');
+        // Return lid down
+        new TWEEN.Tween(topLidGroup.position)
+          .to({ y: 0.7 }, 600)
+          .easing(TWEEN.Easing.Cubic.Out)
+          .start();
+        new TWEEN.Tween(batt.position)
+          .to({ x: -0.35 }, 600)
+          .easing(TWEEN.Easing.Cubic.Out)
+          .start();
+      }
+    };
+
+    // Camera Views
+    window.setCamView = function(view, el) {
+      document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active'));
+      if (el) el.classList.add('active');
+
+      let targetPos, targetLook;
+      if (view === 'iso') {
+        targetPos = { x: 11, y: 10, z: 13 };
+        targetLook = { x: 0, y: 1.5, z: 0 };
+      } else if (view === 'tower') {
+        targetPos = { x: 4.8, y: 4.5, z: -1.2 };
+        targetLook = { x: trayW / 2 - 0.4, y: 3.0, z: -trayL / 2 + 0.4 };
+      } else if (view === 'soil') {
+        targetPos = { x: 1.5, y: 3.5, z: 5.5 };
+        targetLook = { x: 0, y: 0.5, z: 0 };
+      }
+
+      new TWEEN.Tween(camera.position)
+        .to(targetPos, 800)
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .start();
+
+      new TWEEN.Tween(controls.target)
+        .to(targetLook, 800)
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .start();
+    };
+
+    // Sun Slider
+    window.updateSunlight = function(val) {
+      const pct = val / 100;
+      sunLight.intensity = pct * 2.2;
+      sunLight.position.x = 8 * Math.cos((1 - pct) * Math.PI);
+      sunLight.position.y = Math.max(1, 14 * Math.sin(pct * Math.PI));
+
+      const watts = (pct * 6.2).toFixed(1);
+      document.getElementById('valSolar').innerHTML = watts + ' <span class="metric-unit">W</span>';
+      document.getElementById('barSolar').style.width = Math.min(100, pct * 100) + '%';
+    };
+
+    // ---------------- Animation Loop ----------------
+    let clock = new THREE.Clock();
+    let flowOffset = 0;
+
+    function animate() {
+      requestAnimationFrame(animate);
+      TWEEN.update();
+
+      const delta = clock.getDelta();
+      const elapsed = clock.getElapsedTime();
+
+      // Slow idle rotation of entire model if not dragging
+      if (!controls.state || controls.state === -1) {
+        modelGroup.rotation.y += 0.0015;
+      }
+
+      // Blinking ESP32 LED
+      led.visible = Math.sin(elapsed * 8) > 0;
+
+      // Water Pump Action Simulation
+      if (isPumpActive) {
+        // Increase soil moisture gradually
+        if (targetMoisture < 88) targetMoisture += delta * 7;
+
+        // Flow particles animation along Catmull-Rom curve
+        flowOffset += delta * 1.5;
+        const positions = flowGeo.attributes.position.array;
+        for (let i = 0; i < flowCount; i++) {
+          const t = (flowOffset + i / flowCount) % 1;
+          const pt = hoseCurve.getPoint(t);
+          positions[i * 3] = pt.x;
+          positions[i * 3 + 1] = pt.y;
+          positions[i * 3 + 2] = pt.z;
+        }
+        flowGeo.attributes.position.needsUpdate = true;
+      } else {
+        // Soil slowly dries
+        if (targetMoisture > 22 && !isRainActive) targetMoisture -= delta * 0.4;
+      }
+
+      // Rain Particles Animation
+      if (isRainActive) {
+        targetMoisture = Math.min(95, targetMoisture + delta * 12);
+        const rPos = rainGeo.attributes.position.array;
+        for (let i = 0; i < rainCount; i++) {
+          rPos[i * 3 + 1] -= delta * 14;
+          if (rPos[i * 3 + 1] < 0) {
+            rPos[i * 3 + 1] = 8 + Math.random() * 3;
+          }
+        }
+        rainGeo.attributes.position.needsUpdate = true;
+      }
+
+      // Smooth moisture lerp and color change
+      currentMoisture += (targetMoisture - currentMoisture) * 0.08;
+      document.getElementById('valSoil').innerHTML = Math.round(currentMoisture) + ' <span class="metric-unit">%</span>';
+      document.getElementById('barSoil').style.width = Math.round(currentMoisture) + '%';
+
+      // Darken soil color when wet
+      const moistRatio = (currentMoisture - 20) / 75; // 0 (dry) to 1 (wet)
+      soilMat.color.setRGB(
+        0.43 - moistRatio * 0.24,
+        0.26 - moistRatio * 0.16,
+        0.15 - moistRatio * 0.09
+      );
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Resize Handler
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>

@@ -1387,6 +1387,7 @@ $projects = [
         'initial'  => 'AGRINEX IOT NODE',
 
         'github'   => '',
+        'live'     => 'agrinex-3d.html',
 
         'desc'     => 'Prototipe perangkat keras AIoT pemantau kondisi tanah dan iklim mikro pertanian berbasis <strong>ESP32 Edge-AI</strong>, dilengkapi catu daya sel surya mandiri, sensor hujan, probe kelembapan tanah, dan aktuator pompa irigasi otomatis.',
 
@@ -1423,6 +1424,8 @@ $projects = [
         ],
 
         'previews' => [
+
+            ['file' => 'assets/agrinex-3d-digital-twin.png', 'label' => 'Interactive 3D Digital Twin — Simulasi Three.js Web 60 FPS & Telemetri Real-Time'],
 
             ['file' => 'assets/agrinex-iot-prototype-1.webp', 'label' => 'Prototipe Fisik AIoT Node — Modul Solar Cell, Sensor Hujan & Probe Tanah (TRL 3)'],
 

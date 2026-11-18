@@ -1391,6 +1391,7 @@ $projects = [
         'initial'  => 'AGRINEX IOT NODE',
 
         'github'   => '',
+        'live'     => 'agrinex-3d.html',
 
         'desc'     => 'A physical AIoT edge node prototype for monitoring soil conditions and microclimate based on <strong>ESP32 Edge-AI</strong>, equipped with solar power harvesting, rain sensor, capacitive soil moisture probe, and automated irrigation pump actuator.',
 
@@ -1427,6 +1428,8 @@ $projects = [
         ],
 
         'previews' => [
+
+            ['file' => 'assets/agrinex-3d-digital-twin.png', 'label' => 'Interactive 3D Digital Twin — 60 FPS Three.js Web Simulation & Real-Time Telemetry'],
 
             ['file' => 'assets/agrinex-iot-prototype-1.webp', 'label' => 'AIoT Physical Node Prototype — Solar Cell, Rain Sensor & Soil Probe (TRL 3)'],
 
